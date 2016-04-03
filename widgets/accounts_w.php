@@ -2,9 +2,9 @@
 
 $accounts = $db->getAccounts();
 
-foreach ($accounts as $account) {
+foreach ($accounts as $accountName) {
 	print '<br />';
-	print $account;
+	print '<a href="index.php/?tas=' . urlencode($accountName) . '">' . $accountName . '</a>';	
 }
 print '<br />';
 
