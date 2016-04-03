@@ -45,6 +45,18 @@ class WorthDB {
 		$this->email = $email;
 	}
 
+	public function getTransactions($accountName) {
+		$query = "SELECT accountName, merchant, amount, date, category FROM transactions WHERE email='" . $this->email . "' ORDER BY date";
+		$result = $this->getQueryResult($query);
+		$transactions = array();
+		$i = 0;
+		while ($row = mysql_fetch_array($result)) {
+			$transactions[$i] = $row;
+			$i++;
+		}
+		return $transactions;
+	}
+
 	public function getAccounts() {
 		// returns a list of the user's accounts in alphabetical order
 		// $email should be defined by now, since credentialsValid() should have been called and returned true
@@ -52,7 +64,7 @@ class WorthDB {
 		$result = $this->getQueryResult($query);
 		$accounts = array();
 		$i = 0;
-		while($row = mysql_fetch_array($result)) {
+		while ($row = mysql_fetch_array($result)) {
 			$accounts[$i] = $row['accountName'];
 			$i++;
 		}

@@ -67,20 +67,13 @@ $email = $_SESSION["user_email"];
 		<div class="container-fluid">
 			<?php
 
-				//print '<div id="aside">';
-				//	require_once("widgets/time_w.php");
-				//	print '<a href="views/user_manual.pdf">User Manual</a>';
-				//	print '<br />';
-				//	require_once("widgets/watchlist_w.php");
-				//print '</div>';
-
-				print '<br /><br />For testing your front end code, edit worth/views/dashboard.php. ';
-				print 'Use the php method "require_once" to "import" your front end code here. ';
-				print 'See the example on lines 70-75 (commented out)<br /><br />';
-
 				print '<a href="php/logout.php">Logout</a><br />';
 
+				print '<br /><h2>Accounts:</h2></br />';
 				require_once('widgets/accounts_w.php');
+
+				print '<br /><h2>Transactions:</h2></br />';
+				require_once('widgets/transactions_w.php');
 			?>
 
 		</div>
