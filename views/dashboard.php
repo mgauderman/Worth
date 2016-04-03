@@ -74,9 +74,13 @@ $email = $_SESSION["user_email"];
 				//	require_once("widgets/watchlist_w.php");
 				//print '</div>';
 
-				print 'For testing your front end code, edit worth/views/dashboard.php. ';
+				print '<br /><br />For testing your front end code, edit worth/views/dashboard.php. ';
 				print 'Use the php method "require_once" to "import" your front end code here. ';
-				print 'See the example on lines 70-75 (commented out)';
+				print 'See the example on lines 70-75 (commented out)<br /><br />';
+
+				print '<a href="php/logout.php">Logout</a><br />';
+
+				require_once('widgets/accounts_w.php');
 			?>
 
 		</div>
