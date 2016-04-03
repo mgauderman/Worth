@@ -53,6 +53,7 @@ if (isset($_GET['tas'])) {
 					}
 
 				?>
+				</tr>
 				</tbody>
 			</thead>
 		</table>
