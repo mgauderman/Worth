@@ -19,6 +19,15 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 		$this->assertFalse($db->credentialsValid("udubey@usc.edu","abc"));
 	}
 
+	// function testaddAccount() {
+	// 	$db = new WorthDB();
+	// 	$db->connect();
+	// 	$db->setEmail('udubey@usc.edu');
+	// 	$accounts = $db->getAccounts();
+	// 	$db->addAccount('test');
+	// 	$this->assertTrue($db->getAccounts());
+	// }
+
 }
 
 

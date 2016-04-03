@@ -27,7 +27,7 @@ class WorthDB {
 	public function credentialsValid($email, $password) {
 		// return true if the supplied credentials match credentials from the database, false otherwise
 
-		$query = "SELECT * FROM users WHERE email = '" . $email . "' AND password = '" . $password . "'";
+		$query = "SELECT * FROM users WHERE email = '" . $email . "' AND password = '" . $password . "';";
 		$result = $this->getQueryResult($query);
 
 		// if there is no user with the given email address and password, the credentials are invalid
@@ -46,7 +46,7 @@ class WorthDB {
 	}
 
 	public function getTransactions($accountName) {
-		$query = "SELECT accountName, merchant, amount, date, category FROM transactions WHERE email='" . $this->email . "' ORDER BY date";
+		$query = "SELECT accountName, merchant, amount, date, category FROM transactions WHERE email='" . $this->email . "' ORDER BY date;";
 		$result = $this->getQueryResult($query);
 		$transactions = array();
 		$i = 0;
@@ -60,7 +60,7 @@ class WorthDB {
 	public function getAccounts() {
 		// returns a list of the user's accounts in alphabetical order
 		// $email should be defined by now, since credentialsValid() should have been called and returned true
-		$query = "SELECT accountName FROM accounts WHERE email = '" . $this->email . "' ORDER BY accountName";
+		$query = "SELECT accountName FROM accounts WHERE email = '" . $this->email . "' ORDER BY accountName;";
 		$result = $this->getQueryResult($query);
 		$accounts = array();
 		$i = 0;
@@ -69,6 +69,16 @@ class WorthDB {
 			$i++;
 		}
 		return $accounts;
+	}
+
+	public function addAccount($accountName) {
+		$query = "INSERT INTO accounts (email, accountName) VALUES ('" . $this->email . "', '" . $accountName . "');";
+		$result = $this->getQueryResult($query);
+	}
+
+	public function deleteAccount($accountName) {
+		$query = "DELETE FROM accounts WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
+		$result = $this->getQueryResult($query);
 	}
 
 }
