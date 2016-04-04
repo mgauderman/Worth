@@ -74,11 +74,13 @@ class WorthDB {
 	public function addAccount($accountName) {
 		$query = "INSERT INTO accounts (email, accountName) VALUES ('" . $this->email . "', '" . $accountName . "');";
 		$result = $this->getQueryResult($query);
+		return $result;
 	}
 
 	public function deleteAccount($accountName) {
 		$query = "DELETE FROM accounts WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
 		$result = $this->getQueryResult($query);
+		return $result;
 	}
 
 }
