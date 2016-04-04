@@ -8,12 +8,7 @@ end
 When /^I visit the site$/ do
 end
 
-When /^I enter the text Visa Card$/ do
-	# if(page.has_button?('addAccount'))
-	fill_in('Account Name', with: "Visa Card")
-	click_button('Add')
-	# end
-end
+
 # Then /^I should see the button (.*)$/ do |butt|
 # 	expect(page).to have_button(butt)
 # end

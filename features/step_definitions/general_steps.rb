@@ -32,7 +32,15 @@ Then /^I should see the textfield (.*)$/ do |field|
 	expect(page).to have_field(field)
 end
 
-Then /^I should see(.*)$/ do |text|
+Then /^I must not see the label(.*)$/ do |field|
+	expect(page).not_to have_content(field)
+end
+
+When /^I enter the text (.*) in (.*)$/ do |label, field|
+	fill_in(field, with: label)
+end
+
+Then /^I should see the label(.*)$/ do |text|
 	expect(page).to have_content(text)
 end
 
@@ -62,6 +70,13 @@ Then /^I should see the table (.*)$/ do |tab|
 	expect(page).to have_table(tab)
 end
 
+Then /^I should see (\d+) of (.*) label$/ do |num, field|
+	expect(page).to have_content(field), count: num
+end
+
+Then /^I should see (.*) checked$/ do |box|
+	expect(box).to be_checked
+end
 When /^I enter (.*) for (.*)$/ do |text, field|
 	fill_in(field, with: text)
 end
