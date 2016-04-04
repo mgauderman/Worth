@@ -2,6 +2,7 @@
 
 
 $accountsToDisplay = $db->getAccounts();
+$selectedAccounts = "";
 
 
 if (isset($_GET['tas'])) {
@@ -29,26 +30,29 @@ if (isset($_GET['tas'])) {
 				<tbody>
 
 					<?php
-					foreach($selectedAccounts as $account) {
-						$accountName = $account;
-						print '<tr><td>';
-						print($accountName);
-						print '</td>';
-						$transactions = $db->getTransactions($accountName);
-						foreach($transactions as $transaction) {
-							if($transaction['accountName'] == $accountName) {
-									print '<td>';
-									print $transaction['date'];
-									print '</td><td>';
-									print $transaction['amount'];
-									print '</td><td>';
-									print $transaction['merchant'];
-									print '</td><td>';
-									print $transaction['category'];
-									print '</td>';	
-							}
+					if($selectedAccounts) {
 
-					}
+						foreach($selectedAccounts as $account) {
+							$accountName = $account;
+							print '<tr><td>';
+							print($accountName);
+							print '</td>';
+							$transactions = $db->getTransactions($accountName);
+							foreach($transactions as $transaction) {
+								if($transaction['accountName'] == $accountName) {
+										print '<td>';
+										print $transaction['date'];
+										print '</td><td>';
+										print $transaction['amount'];
+										print '</td><td>';
+										print $transaction['merchant'];
+										print '</td><td>';
+										print $transaction['category'];
+										print '</td>';	
+								}
+	
+							}
+						}
 
 					}
 
