@@ -34,10 +34,13 @@ $accounts = $db->getAccounts();
 
 <?php
 
+
 foreach ($accounts as $accountName) {
 	print '<br />';
-	$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
-
+	
+	if (isset($_GET['tas'])) {
+		$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
+	}
 	echo '<div class="checkbox">
 		<label>
 			<input type="checkbox" onclick="window.location.href=$link">' . $accountName . '</input>
