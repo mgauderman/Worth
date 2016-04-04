@@ -8,12 +8,12 @@ Then /^I should be forwarded to the Dashboard View$/ do
 end
 
 Given /^I am on the dashboard page$/ do
-	visit 'http://localhost/Worth/'
+	visit 'http://localhost/worth/'
 	#page.evaluate_script('document.body.style.zoom = 0.75;')
 	if !page.has_button?('Login')
 		visit 'http://localhost'
 		Capybara.reset_sessions!
-		visit 'http://localhost/Worth/'
+		visit 'http://localhost/worth/'
 		expect(page).to have_button('Login')
 	end
 	if page.has_button?('Login')
