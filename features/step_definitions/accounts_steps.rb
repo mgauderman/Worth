@@ -5,9 +5,6 @@ Then /^I should see a text field to add accounts$/ do
 	expect(page).to have_field('Account Name')
 end
 
-When /^I visit the site$/ do
-end
-
 
 # Then /^I should see the button (.*)$/ do |butt|
 # 	expect(page).to have_button(butt)

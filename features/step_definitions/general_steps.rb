@@ -6,6 +6,9 @@ end
 Then /^I should be forwarded to the Dashboard View$/ do
 	expect(page).to have_link('Logout')
 end
+Then /^I should be redirected to the Dashboard View$/ do
+	expect(page).to have_link('Logout')
+end
 
 Given /^I am on the dashboard page$/ do
 	visit 'http://localhost/worth/'
