@@ -10,7 +10,7 @@ Feature: Accounts Widget
 		When I visit the site
 		Then I should see the textfield Account Name
 		And I should see the button Add
-		And I should see the button Remove
+		And I should see the button Delete
 	Scenario: Add Accounts
 		Given I am on the dashboard page
 		When I enter the text Visa Card
