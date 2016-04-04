@@ -8,12 +8,12 @@ Then /^I should be forwarded to the Dashboard View$/ do
 end
 
 Given /^I am on the dashboard page$/ do
-	visit 'http://localhost/worth/index.php'
+	visit 'http://localhost/Worth/'
 	#page.evaluate_script('document.body.style.zoom = 0.75;')
 	if !page.has_button?('Login')
 		visit 'http://localhost'
 		Capybara.reset_sessions!
-		visit 'http://localhost/worth/index.php'
+		visit 'http://localhost/Worth/'
 		expect(page).to have_button('Login')
 	end
 	if page.has_button?('Login')
@@ -29,6 +29,11 @@ end
 Then /^I should see the textfield (.*)$/ do |field|
 	expect(page).to have_field(field)
 end
+
+Then /^I should see(.*)$/ do |text|
+	expect(page).to have_content(text)
+end
+
 Then /^I should see the button (.*)$/ do |butt|
 	expect(page).to have_button(butt)
 end
