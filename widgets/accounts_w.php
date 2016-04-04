@@ -38,12 +38,20 @@ $accounts = $db->getAccounts();
 foreach ($accounts as $accountName) {
 	print '<br />';
 	
+	// if (isset($_GET['tas'])) {
+	// 	$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
+	// }
+	$link = './?tas=' . urlencode($accountName);
+	//$link = "";
 	if (isset($_GET['tas'])) {
-		$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
+		$link = './?tas=' . urlencode($accountName) . urlencode(',') . urlencode(($_GET['tas']));
 	}
+
 	echo '<div class="checkbox">
 		<label>
-			<input type="checkbox" onclick="window.location.href=$link">' . $accountName . '</input>
+			<input type="checkbox" name="check" onclick="window.location.href=\'' . $link . '\'"
+			>' . $accountName . '</input>
+
 		</label>
 	</div>';
 
@@ -60,6 +68,7 @@ echo '<form action="php/add_delete_handle.php?email=' . urlencode($email) . '" i
 			<input type="text" class="form-control" id="account" name="account" placeholder="Visa Credit Card">
 		</div>
 	</div>
-	<button type="submit" class="btn btn-default" name="add_button">Add</button>
-	<button type="submit" class="btn btn-default" name="delete_button">Delete</button>
+	<button type="submit" class="btn btn-primary" name="add_button">Add</button>
+	<button type="submit" class="btn btn-danger" name="delete_button">Delete</button>
 </form>
+ <!-- <?php //if(isset($_POST['check'])) echo "checked='checked'";?> -->
