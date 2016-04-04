@@ -23,6 +23,8 @@ Given /^I am on the dashboard page$/ do
 	end
 	expect(page).to have_content('Logout')
 end
+
+
 When /^I click on the link (.*)$/ do |link|
 	click_link(link)
 end

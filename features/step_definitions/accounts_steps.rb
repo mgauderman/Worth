@@ -10,7 +10,7 @@ end
 
 When /^I enter the text Visa Card$/ do
 	# if(page.has_button?('addAccount'))
-	fill_in('accountName', with: "Visa Card")
+	fill_in('Account Name', with: "Visa Card")
 	click_button('Add')
 	# end
 end

@@ -8,7 +8,7 @@ Feature: Accounts Widget
 	Scenario: Add/Remove Buttons
 		Given I am on the dashboard page
 		When I visit the site
-		Then I should see the textfield accountName
+		Then I should see the textfield Account Name
 		And I should see the button Add
 		And I should see the button Remove
 	Scenario: Add Accounts
