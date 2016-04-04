@@ -2,14 +2,21 @@
 
 $accounts = $db->getAccounts();
 
+
 foreach ($accounts as $accountName) {
 	print '<br />';
-	print '<a href="index.php/?tas=' . urlencode($accountName) . '">' . $accountName . '</a>';	
+	$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
+
+	echo '<div class="checkbox">
+		<label>
+			<input type="checkbox" onclick="window.location.href=$link">' . $accountName . '</input>
+		</label>
+	</div>';
+
 }
 print '<br />';
 
-
-echo "<div class="container-fluid">
+echo '<div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-6">
 			<div class="input-group">
@@ -21,5 +28,5 @@ echo "<div class="container-fluid">
 			</div>
 		</div>
 	</div>
-</div>";
+</div>';
 ?>
