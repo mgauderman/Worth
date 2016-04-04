@@ -14,7 +14,7 @@ class WorthDB {
 		mysql_select_db($this->db_database, $db_server);
 	}
 
-	private static function getQueryResult($query) {
+	public static function getQueryResult($query) {
 		$result = mysql_query($query);
 		if (!$result) {
 			print 'BAD MYSQL QUERY: ' . $query;
@@ -46,7 +46,7 @@ class WorthDB {
 	}
 
 	public function getTransactions($accountName) {
-		$query = "SELECT accountName, merchant, amount, date, category FROM transactions WHERE email='" . $this->email . "' ORDER BY date;";
+		$query = "SELECT accountName, merchant, amount, date, category FROM transactions WHERE email='" . $this->email . "' AND accountName = '" . $accountName . "' ORDER BY date;";
 		$result = $this->getQueryResult($query);
 		$transactions = array();
 		$i = 0;
