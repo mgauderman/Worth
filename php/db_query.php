@@ -51,6 +51,7 @@ class WorthDB {
 		$transactions = array();
 		$i = 0;
 		while ($row = mysql_fetch_array($result)) {
+			$row['amount'] = number_format($row['amount'], 2);
 			$transactions[$i] = $row;
 			$i++;
 		}
