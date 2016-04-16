@@ -15,4 +15,4 @@ Feature: Accounts Widget
 		Given I am on the dashboard page
 		When I enter the text Visa Card
 		And I click on the button Add
-		Then I should see Visa Card
+		Then I should see the text Visa Card

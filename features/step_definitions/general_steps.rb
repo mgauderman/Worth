@@ -32,7 +32,7 @@ Then /^I should see the textfield (.*)$/ do |field|
 	expect(page).to have_field(field)
 end
 
-Then /^I should see(.*)$/ do |text|
+Then /^I should see the text(.*)$/ do |text|
 	expect(page).to have_content(text)
 end
 
