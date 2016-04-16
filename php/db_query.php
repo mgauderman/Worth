@@ -73,6 +73,7 @@ class WorthDB {
 	}
 
 	public function addAccount($accountName) {
+		$this->deleteAccount($accountName);
 		$query = "INSERT INTO accounts (email, accountName) VALUES ('" . $this->email . "', '" . $accountName . "');";
 		$result = $this->getQueryResult($query);
 		return $result;
