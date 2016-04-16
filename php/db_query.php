@@ -51,6 +51,7 @@ class WorthDB {
 		$transactions = array();
 		$i = 0;
 		while ($row = mysql_fetch_array($result)) {
+			$row['amount'] = number_format($row['amount'], 2);
 			$transactions[$i] = $row;
 			$i++;
 		}
@@ -72,6 +73,7 @@ class WorthDB {
 	}
 
 	public function addAccount($accountName) {
+		$this->deleteAccount($accountName);
 		$query = "INSERT INTO accounts (email, accountName) VALUES ('" . $this->email . "', '" . $accountName . "');";
 		$result = $this->getQueryResult($query);
 		return $result;

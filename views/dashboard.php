@@ -75,6 +75,10 @@ $email = $_SESSION["user_email"];
 		<div class="container-fluid">
 			<?php
 				print '<a href="php/logout.php">Logout</a><br />';
+
+				print '<br /><h2>Graph:</h2><br />';
+				require_once('widgets/graph_w.php');
+
 				print '<br /><h2>Accounts:</h2></br />';
 				require_once('widgets/accounts_w.php');
 			

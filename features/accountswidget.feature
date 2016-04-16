@@ -13,6 +13,19 @@ Feature: Accounts Widget
 		And I should see the button Delete
 	Scenario: Add Accounts
 		Given I am on the dashboard page
-		When I enter the text Visa Card
+		When I enter the text Visa Card in Account Name
 		And I click on the button Add
-		Then I should see the text Visa Card
+		Then I should see the label Visa Card
+	Scenario: Checking Box Updates Transactions
+		Given I am on the dashboard page
+		When I check the checkbox check1
+		Then I should see 2 of Visa Card label
+	Scenario: Checkbox Box Persists Through Refresh
+		Given I am on the dashboard page
+		When I visit the site
+		Then I should see check1 checked
+	Scenario: Remove Accounts
+		Given I am on the dashboard page
+		And I enter the text Visa Card in Account Name
+		And I click on the button Delete
+		Then I must not see the label Visa Card

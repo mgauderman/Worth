@@ -34,22 +34,28 @@ $accounts = $db->getAccounts();
 
 <?php
 
-
+$count = 0;
 foreach ($accounts as $accountName) {
+	$count++;
 	print '<br />';
 	
 	// if (isset($_GET['tas'])) {
 	// 	$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
 	// }
+	$ischecked = "";
+	if(isset($_POST['check' . $count])) $ischecked = "checked";
+
 	$link = './?tas=' . urlencode($accountName);
 	//$link = "";
 	if (isset($_GET['tas'])) {
 		$link = './?tas=' . urlencode($accountName) . urlencode(',') . urlencode(($_GET['tas']));
 	}
 
+	$name = 'check' . $count;
+
 	echo '<div class="checkbox">
 		<label>
-			<input type="checkbox" name="check" onclick="window.location.href=\'' . $link . '\'"
+			<input type="checkbox" ' . $ischecked . ' name=' . $name . ' onclick="window.location.href=\'' . $link . '\'"
 			>' . $accountName . '</input>
 
 		</label>
@@ -71,4 +77,3 @@ echo '<form action="php/add_delete_handle.php?email=' . urlencode($email) . '" i
 	<button type="submit" class="btn btn-primary" name="add_button">Add</button>
 	<button type="submit" class="btn btn-danger" name="delete_button">Delete</button>
 </form>
- <!-- <?php //if(isset($_POST['check'])) echo "checked='checked'";?> -->
