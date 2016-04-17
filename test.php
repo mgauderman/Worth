@@ -13,6 +13,8 @@
 	print var_dump($db->getTotalAssets('2012-04-01', '2016-04-16'));
 	print '<br />';
 	print var_dump($db->getTotalLiabilities('2012-04-01', '2016-04-16'));
+	print '<br />';
+	print var_dump($db->getNetWorths('2012-04-01', '2016-04-16'));
 
 ?>
 

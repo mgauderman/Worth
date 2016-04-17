@@ -116,7 +116,18 @@ class WorthDB {
 	}
 
 	public function getNetWorths($startDate, $endDate) {
-		
+		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$result = $this->getQueryResult($query);
+		$netWorths = array(); // map from date (as string) to number
+		$sum = 0;
+		if ($result == null) {
+			return $netWorths;
+		}
+		while ($row = mysql_fetch_array($result)) {
+			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$netWorths[split(' ', $row['date'])[0]] = $sum;
+		}
+		return $netWorths;
 	}
 
 	public function addTransactions($accountName, $transactions) {
