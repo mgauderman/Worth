@@ -248,29 +248,6 @@ $email = $_SESSION["user_email"];
 				</tbody>
 
 		</table>
-<!-- 		<div class="container-fluid">
-			<?php
-
-				// print '<a href="php/logout.php">Logout</a><br />';
-
-				// print '<br /><h2>Graph:</h2><br />';
-				// require_once('widgets/graph_w.php');
-
-				// print '<br /><h2>Accounts:</h2></br />';
-				// require_once('widgets/accounts_w.php');
-				print '<a href="php/logout.php">Logout</a><br />';
-
-				print '<br /><h2>Graph:</h2><br />';
-				require_once('widgets/graph_w.php');
-
-				print '<br /><h2>Accounts:</h2></br />';
-				require_once('widgets/accounts_w.php');
-			
-				// print '<br /><h2>Transactions:</h2></br />';
-				// require_once('widgets/transactions_w.php');
-			?>
-
-		</div> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="../jquery.min.js"><\/script>')</script>
 		<!-- Latest compiled and minified JavaScript -->
