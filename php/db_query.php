@@ -88,6 +88,21 @@ class WorthDB {
 		return $result;
 	}
 
+	public function getTransactionsForGraph($startDate, $endDate, $accountName) {
+		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND accountName = "' . $accountName . '" AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$result = $this->getQueryResult($query);
+		if ($result == null) {
+			return array();
+		}
+		$transactionsForGraph = array();
+		$sum = 0;
+		while ($row = mysql_fetch_array($result)) {
+			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$transactionsForGraph[split(' ', $row['date'])[0]] = $sum;
+		}
+		return $transactionsForGraph;
+	}
+
 	public function getTotalAssets($startDate, $endDate) {
 		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 1 AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
 		$result = $this->getQueryResult($query);

@@ -43,7 +43,7 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 		$db = new WorthDB();
 		$db->connect();
 		$db->setEmail('test@usc.edu');
-		$db->getQueryResult('DELETE * FROM accounts WHERE email="test@usc.edu";');
+		$db->getQueryResult('DELETE FROM accounts WHERE email="test@usc.edu";');
 		$this->assertEquals(count($db->getAccounts()), 0);
 		$db->getQueryResult('INSERT INTO accounts (email, accountName) VALUES ("test@usc.edu", "test account");');
 		$this->assertEquals(count($db->getAccounts()), 1);
@@ -109,7 +109,7 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 
 		// insert some transactions
 		$db->getQueryResult('INSERT INTO transactions (email, accountName, merchant, amount, date, category, asset) VALUES ("test@usc.edu", "US Bank Account", "University of Southern California", 2.99, NOW(), "Work Income", 1);');
-		$db->getQueryResult('INSERT INTO accounts (email, accountName) VALUES ("test@usc.edu", "US Bank Credit Card");');
+		$db->getQueryResult('INSERT INTO accounts (email, accountName) VALUES ("test@usc.edu", "US Bank Account");');
 		$db->getQueryResult('INSERT INTO transactions (email, accountName, merchant, amount, date, category, asset) VALUES ("test@usc.edu", "First Republic Bank Account", "Stanford University", 1.47, NOW(), "Work Income", 1);');
 		$db->getQueryResult('INSERT INTO accounts (email, accountName) VALUES ("test@usc.edu", "First Republic Bank Account");');
 
