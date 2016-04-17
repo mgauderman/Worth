@@ -42,30 +42,30 @@ if($_FILES) {
             $nicename = substr($name, 0, -4);
             // echo $nicename;
             $row = 0;
-
             $account = array();
-            $account['name'] = $name;
+            $account['name'] = str_replace('.csv', '', $name);
             $count = 0;
             while(($data = fgetcsv($handle, 1000, ' ')) !== FALSE) {
                 // echo $data[0];
                 $transaction = (explode(",",$data[0]));
                 // echo $transaction[0];
-                if($transaction[0] == "Asset"){
+                if ($count == 0 && $transaction[0] == "Asset"){
                     $account['transactions'][0]['asset'] = 1;
+                    $count++;
                 }
-                else {
+                else if ($count == 0) {
                     $account['transactions'][0]['asset'] = 0;
+                    $count++;
+                } else {
+                    $account['transactions'][$count-1]['date'] = $transaction[0] . ' ' . $transaction[1];
+                    $account['transactions'][$count-1]['time'] = $transaction[1];
+                    $account['transactions'][$count-1]['amount'] = $transaction[2];
+                    $account['transactions'][$count-1]['merchant'] = $transaction[3];
+                    $account['transactions'][$count-1]['category'] = $transaction[4];
+                    $count++;
                 }
-                $account['transactions'][$count]['date'] = $transaction[1];
-                $account['transactions'][$count]['time'] = $transaction[2];
-                $account['transactions'][$count]['amount'] = $transaction[3];
-                $account['transactions'][$count]['merchant'] = $transaction[4];
-                $account['transactions'][$count]['category'] = $transaction[5];
-                $db->addTransactions($account['name'], $account['transactions']);
-                $count++;
-                // var_dump($account);
             }
-            // var_dump ($account);
+            $db->addTransactions($account['name'], $account['transactions']);
             fclose($handle);
         }
     }
