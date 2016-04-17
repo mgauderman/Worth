@@ -66,23 +66,187 @@ $email = $_SESSION["user_email"];
 				float:right;
 				padding:5px;
 			}
+
+			.haveAccount {
+			    margin-top: 30px;
+			    text-align: right;
+			}     
+
+
+			.checking {
+			     width: 13px;
+			    height: 13px;
+			    padding: 0;
+			    margin:0;
+			    vertical-align: bottom;
+			    position: relative;
+			    top: -1px;
+			    *overflow: hidden;
+			}
+			.pointer {
+			    cursor: pointer;
+			}
+
+			.moduleDiv {
+			    width:100%;
+			    height:300px;
+			/*    background-color: red;
+			*/}
+
+			.table-hover tbody tr:hover td{
+			  background-color: #f2f2f2;
+			}
+
+			table.table.portfolioWidget th {
+			    background-color: white
+			}
+			table.table.portfolioWidget td,
+			table.table.portfolioWidget th {
+			     border-radius: 0px !important;
+			    height: 40px;
+			    text-align: center;
+			}
+
+			.portfolioPage td {
+
+			    background-color: lightgray;
+			    border-radius: 10px !important;
+			    padding: 20px;
+			    
+			    vertical-align: top;
+
+			}
+			.pageHeader {
+			    
+			}
+
+			.moduleTitle {
+			    margin-top:0px !important;
+			    text-align: center !important;
+			}
+
+			body {
+			    background-color: #333333;
+			}
+
+			.regAndLogForm {
+			    border-radius: 10px !important;
+			    background-color: white;
+			    width:500px;
+			    height:600px;
+			    margin:auto;
+			    padding: 50px;
+			    position:absolute;
+			    top:0;
+			    bottom:0;
+			    right:0;
+			    left:0;      
+			}
+			#regPage {
+
+			}
+
+			.formButton:active regForm {
+			    display:none;
+			}
+
+			.formButton {
+			    display: block;
+			    margin: auto;
+			    margin-top: 30px;
+			}
+
+			.error {
+			    color:#FF0000;
+			}
+
+
+
+
+
+
+
+
 		</style>
 
 	</head>
 
 	<body onload="startTime()">
 
-		<div class="container-fluid">
-			<?php
-				print '<a href="php/logout.php">Logout</a><br />';
-				print '<br /><h2>Accounts:</h2></br />';
-				require_once('widgets/accounts_w.php');
-			
-				print '<br /><h2>Transactions:</h2></br />';
-				require_once('widgets/transactions_w.php');
-			?>
 
-		</div>
+		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100% ">
+			<thead>
+			</thead>
+				<tbody>
+					<!-- Top -->
+					<tr>
+						<!-- Import csv -->
+						<td style ="width: 400px; height: 80px; text-align:center; padding-top:0px">
+							<?php	
+								print '<h2>CSV Import</h2>';
+								require_once('widgets/csv_w.php');
+							?>
+						</td>
+						<!-- Search -->
+						<td style="width:50%;     text-align: -webkit-center;">
+						
+						</td>
+
+						<!-- Date, User Manual, Logout -->
+						<td style="vertical-align:middle;width:25%; text-align:center ">
+							<a href="php/logout.php" class = "btn btn-default" style="width:70%">Logout</a>
+						
+
+						</td>
+					</tr>
+
+					<!-- Middle -->
+					<tr>
+						<!-- Accounts -->
+						<td  style="padding-top:0px;height:480px; width:25%; padding-top:0px;">
+							<?php
+							print '<h2 style=" text-align:center;">Accounts</h2>';
+							require_once('widgets/accounts_w.php');
+							?>
+						</td>
+
+						<!-- Graph -->
+
+						<td class="graphTD" style="vertical-align: top; border-collapse: collapse;">
+						
+						</td>
+
+						<!--Other thing -->
+						<td style="padding-top:0px">
+							
+						</td>
+						
+					</tr>
+
+					<!-- Bottom -->
+					<tr>
+						<!-- Bottom Left -->
+						<td class="buySellWidget" style="    height: 255px;padding-top: 0px;  border-collapse: collapse;">
+						
+						</td>
+						<!-- Transactions-->
+						<td style="padding-top:0px;height:200px ">
+						<?php
+							print '<h2 style=" text-align:center;">Transactions</h2>';
+							require_once('widgets/transactions_w.php');
+						?>
+						</td>
+
+						<!-- Bottom Right-->
+						<td style="height:200px; ">
+
+						</td>
+
+					</tr>
+					
+				</tbody>
+
+		</table>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="../jquery.min.js"><\/script>')</script>
 		<!-- Latest compiled and minified JavaScript -->
