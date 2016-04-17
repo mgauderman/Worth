@@ -1,7 +1,7 @@
-<?php 
+<?php
+ 
 ?>
-<div style="font-color:red;" id="chart">
-</div>
+<div style="font-color:red;" id="chart"></div>
 
 <link href="vendors/c3.min.css" rel="stylesheet" type="text/css">
 <script src="vendors/d3.min.js" charset="utf-8"></script>
@@ -14,9 +14,6 @@
 		['x', 2016, 2017, 2018, 2019, 2021, 2022],
 		['x2', 2015, 2017, 2018, 2023]
 	]; 
-
-	
-
 
 	var chart = c3.generate({
 		bindto: '#chart',
