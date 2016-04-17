@@ -1,5 +1,5 @@
 <?php
-$accountsToDisplay = $db->getAccounts();
+// $accountsToDisplay = $db->getAccounts();
 // var_dump($accountsToDisplay) ;
 	// This block creates a label and a button for csv file importing and
 	// allows the user to select a file from their computer
@@ -17,7 +17,7 @@ $accountsToDisplay = $db->getAccounts();
 
 
 
-<form action="index.php" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data">
     <input style="display: inline;"type="file" name="csv" value="" />
     <input type="submit" name="submit" value="Save" />
 </form>
@@ -47,14 +47,23 @@ if($_FILES) {
             $account['name'] = $name;
             $count = 0;
             while(($data = fgetcsv($handle, 1000, ' ')) !== FALSE) {
+                // echo $data[0];
                 $transaction = (explode(",",$data[0]));
                 // echo $transaction[0];
-                $account['transactions'][$count]['date'] = $transaction[0];
-                $account['transactions'][$count]['time'] = $transaction[1];
-                $account['transactions'][$count]['ammount'] = $transaction[2];
-                $account['transactions'][$count]['merchant'] = $transaction[3];
-                $account['transactions'][$count]['category'] = $transaction[4];
+                if($transaction[0] == "Asset"){
+                    $account['transactions'][0]['asset'] = 1;
+                }
+                else {
+                    $account['transactions'][0]['asset'] = 0;
+                }
+                $account['transactions'][$count]['date'] = $transaction[1];
+                $account['transactions'][$count]['time'] = $transaction[2];
+                $account['transactions'][$count]['amount'] = $transaction[3];
+                $account['transactions'][$count]['merchant'] = $transaction[4];
+                $account['transactions'][$count]['category'] = $transaction[5];
+                $db->addTransactions($account['name'], $account['transactions']);
                 $count++;
+                // var_dump($account);
             }
             // var_dump ($account);
             fclose($handle);
