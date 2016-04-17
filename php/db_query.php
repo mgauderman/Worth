@@ -51,7 +51,7 @@ class WorthDB {
 		$transactions = array();
 		$i = 0;
 		while ($row = mysql_fetch_array($result)) {
-			$row['amount'] = number_format($row['amount'], 2);
+			$row['amount'] = floatval(number_format($row['amount'], 2));
 			$transactions[$i] = $row;
 			$i++;
 		}
@@ -65,6 +65,9 @@ class WorthDB {
 		$result = $this->getQueryResult($query);
 		$accounts = array();
 		$i = 0;
+		if ($result == null) {
+			return $accounts;
+		}
 		while ($row = mysql_fetch_array($result)) {
 			$accounts[$i] = $row['accountName'];
 			$i++;
@@ -131,7 +134,34 @@ class WorthDB {
 	}
 
 	public function addTransactions($accountName, $transactions) {
-		
+		if (in_array($accountName, $this->getAccounts())) {
+			foreach($transactions as $transaction) {
+				$query = 'SELECT asset FROM transactions WHERE email="' . $this->email . '" AND accountName = "' . $accountName . '";';
+				$result = $this->getQueryResult($query);
+				$isAssetAcount = 0;
+				while ($row = mysql_fetch_array($result)) {
+					if ($row['asset'] == '1') {
+						$isAssetAccount = 1;
+					}
+				}
+				if ($isAssetAccount == 1) {
+					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category, asset) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '", 1);';
+				} else {
+					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '");';
+				}
+				return $this->getQueryResult($query);
+			}
+		} else {
+			$isAssetAccount = $transactions[0]['asset'];
+			foreach($transactions as $transaction) {
+				if ($isAssetAccount == 1) {
+					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category, asset) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '", 1);';
+				} else {
+					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '");';
+				}
+				$this->getQueryResult($query);
+			}
+		}
 	}
 
 }
