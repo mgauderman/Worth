@@ -1,0 +1,11 @@
+[33mcommit f170f7e44cfa6e1029125e42208f73acd2162d19[m
+Author: Utkash Dubey Linux <udubey@usc.edu>
+Date:   Sat Apr 2 09:35:12 2016 -0700
+
+    setup basic login functionality and included last project's code for reference
+
+[33mcommit c9e5c120d05bb7b58d799f97753e32ce76256271[m
+Author: Utsav Ahuja <avastu@gmail.com>
+Date:   Fri Mar 25 11:57:36 2016 -0700
+
+    Laravel skeleton set up. Use php artisan serve to run
