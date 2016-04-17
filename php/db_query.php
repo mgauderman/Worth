@@ -17,7 +17,7 @@ class WorthDB {
 	public static function getQueryResult($query) {
 		$result = mysql_query($query);
 		if (!$result) {
-			print 'BAD MYSQL QUERY: ' . $query;
+			// print 'BAD MYSQL QUERY: ' . $query;
 			return null;
 		} else {
 			return $result;
@@ -83,6 +83,44 @@ class WorthDB {
 		$query = "DELETE FROM accounts WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
 		$result = $this->getQueryResult($query);
 		return $result;
+	}
+
+	public function getTotalAssets($startDate, $endDate) {
+		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 1 AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$result = $this->getQueryResult($query);
+		$totalAssets = array(); // map from date (as string) to number
+		$sum = 0;
+		if ($result == null) {
+			return $totalAssets;
+		}
+		while ($row = mysql_fetch_array($result)) {
+			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$totalAssets[split(' ', $row['date'])[0]] = $sum;
+		}
+		return $totalAssets;
+	}
+
+	public function getTotalLiabilities($startDate, $endDate) {
+		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 0 AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$result = $this->getQueryResult($query);
+		$totalAssets = array(); // map from date (as string) to number
+		$sum = 0;
+		if ($result == null) {
+			return $totalAssets;
+		}
+		while ($row = mysql_fetch_array($result)) {
+			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$totalAssets[split(' ', $row['date'])[0]] = (-1) * $sum;
+		}
+		return $totalAssets;
+	}
+
+	public function getNetWorths($startDate, $endDate) {
+		
+	}
+
+	public function addTransactions($accountName, $transactions) {
+		
 	}
 
 }

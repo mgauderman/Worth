@@ -224,14 +224,6 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 		$db->getQueryResult('DELETE FROM accounts WHERE email="test@usc.edu";');
 	}
 
-	/* TODO
-	function testgetTotalAssets() {
-		$db = new WorthDB();
-		$db->connect();
-		$db->setEmail('udubey@usc.edu');
-	}
-	*/
-
 }
 
 
