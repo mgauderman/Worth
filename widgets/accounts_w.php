@@ -1,7 +1,5 @@
 <!-- <?php
 
-$accounts = $db->getAccounts();
-
 
 // foreach ($accounts as $accountName) {
 // 	print '<br />';
@@ -34,29 +32,46 @@ $accounts = $db->getAccounts();
 
 <?php
 
+$accounts = $db->getAccounts();
+
 $count = 0;
 foreach ($accounts as $accountName) {
-	$count++;
 	print '<br />';
 	
 	// if (isset($_GET['tas'])) {
 	// 	$link = './?tas=' . urlencode($accountName) . ',' . ($_GET['tas']);
 	// }
 	$ischecked = "";
-	if(isset($_POST['check' . $count])) $ischecked = "checked";
 
 	$link = './?tas=' . urlencode($accountName);
-	//$link = "";
 	if (isset($_GET['tas'])) {
-		$link = './?tas=' . urlencode($accountName) . urlencode(',') . urlencode(($_GET['tas']));
+		$link = './?tas=' . urlencode($accountName . ',') . urlencode($_GET['tas']);
+
+		if (strpos(urldecode($_GET['tas']), $accountName) !== false) {
+			$ischecked = 'checked';
+
+			if (strpos(urldecode($_GET['tas']), $accountName . ',') !== false) {
+				
+				// if the accountName is not the last one in the url, remove the accountName and the comma
+				$link = './?tas=' . urlencode(str_replace($accountName . ',', '', urldecode($_GET['tas'])));
+			
+			} else {
+
+				// the accountName is the last one in the url and we won't find a comma after the accountName, but we'll find one before it
+				$link = './?tas=' . urlencode(str_replace(',' . $accountName, '', urldecode($_GET['tas'])));
+				
+				if (urlencode(str_replace($accountName, '', urldecode($_GET['tas']))) == '') {
+					$link = '.';
+				}
+			}
+		}
 	}
 
 	$name = 'check' . $count;
 
 	echo '<div class="checkbox">
 		<label>
-			<input type="checkbox" ' . $ischecked . ' name=' . $name . ' onclick="window.location.href=\'' . $link . '\'"
-			>' . $accountName . '</input>
+			<input type="checkbox" ' . $ischecked . ' name="' . $name . '" onclick="window.location.href=\'' . $link . '\'">' . $accountName . '</input>
 
 		</label>
 	</div>';
