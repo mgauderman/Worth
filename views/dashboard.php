@@ -250,6 +250,7 @@ $email = $_SESSION["user_email"];
 		</table>
 <!-- 		<div class="container-fluid">
 			<?php
+
 				// print '<a href="php/logout.php">Logout</a><br />';
 
 				// print '<br /><h2>Graph:</h2><br />';
@@ -257,6 +258,13 @@ $email = $_SESSION["user_email"];
 
 				// print '<br /><h2>Accounts:</h2></br />';
 				// require_once('widgets/accounts_w.php');
+				print '<a href="php/logout.php">Logout</a><br />';
+
+				print '<br /><h2>Graph:</h2><br />';
+				require_once('widgets/graph_w.php');
+
+				print '<br /><h2>Accounts:</h2></br />';
+				require_once('widgets/accounts_w.php');
 			
 				// print '<br /><h2>Transactions:</h2></br />';
 				// require_once('widgets/transactions_w.php');
