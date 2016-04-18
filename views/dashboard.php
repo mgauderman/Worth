@@ -171,7 +171,7 @@ $email = $_SESSION["user_email"];
 
 	</head>
 
-	<body onload="startTime()">
+	<body>
 
 
 		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100% ">
