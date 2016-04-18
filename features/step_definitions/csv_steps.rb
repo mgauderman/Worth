@@ -1,8 +1,9 @@
 When /^I check the test checkbox$/ do
 	visit 'http://localhost/worth/?tas=Debit+Card'
+end
 
-Then /^I upload our example csv file$/ do
-	attach_file('csvInputFile', '/var/www/html/Worth/widgets/Debit Card.csv')
+When /^I upload our example csv file$/ do
+	attach_file('csv', '/var/www/html/worth/widgets/Debit Card.csv')
 end
 
 Then /^I expect to see the account (.*)$/ do |text|
@@ -11,3 +12,5 @@ end
 
 
 
+
+		# When I click on the button csv

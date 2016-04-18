@@ -44,8 +44,13 @@ When /^I enter the text (.*) in (.*)$/ do |label, field|
 end
 
 Then /^I should see the label(.*)$/ do |text|
+	expect(page).to have_content(text) 
+end
+
+Then /^I should see (\d+) of (.*)$/ do |num, text|
 	expect(page).to have_content(text)
 end
+
 
 Then /^I should see the button (.*)$/ do |butt|
 	expect(page).to have_button(butt)

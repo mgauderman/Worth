@@ -20,6 +20,6 @@ Then /^I should see a (.*) div on the page$/ do |field|
 	expect(page).to have_css('div#' + field)
 end
 
-# Then /^I should have (.*) (.*) selector$/ do |selector, id|
-# 	expect(page).to have_css selector + '#' + id
-# end
+Then /^I should see a (.*) input on the page$/ do |field|
+	expect(page).to have_css('input#' + field)
+end
