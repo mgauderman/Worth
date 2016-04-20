@@ -78,10 +78,6 @@ Then /^I should see the table (.*)$/ do |tab|
 	expect(page).to have_table(tab)
 end
 
-Then /^I should see (\d+) of (.*) label$/ do |num, field|
-	expect(page).to have_content(field), count: num
-end
-
 Then /^I should see (.*) checked$/ do |box|
 	expect(box).to be_checked
 end

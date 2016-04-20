@@ -1,0 +1,63 @@
+<html><body>
+
+<?php
+
+	ini_set('display_errors', 1);
+
+	$serverName = 'localhost';
+	$username = 'root';
+	$password = 'mystockportfolio123';
+
+	$link = mysql_connect($serverName, $username, $password);
+	/*if ($link) {
+		print '[SUCCESS] Connected <br />'.
+	} else {
+		die('[FAILURE] Could not connect. ' . mysql_error());
+	}*/
+
+	$db_selected = mysql_select_db('worth');
+
+	/*if (!$db_selected) {
+		$query = 'CREATE DATABASE worth;';
+		if (mysql_query($query, $link)) {
+			print '[SUCCESS] Database \'worth\' created. <br />';
+			$db_selected = mysql_select_db('worth', $link);
+			if (!$db_selected) {
+				die('[FAILURE] Selecting created db \'worth\' failed. ' . mysql_error());
+			} else {
+				print '[SUCCESS] Selected created db \'worth\'. <br />');
+			}
+		} else {
+			die('Error creating database. ' . mysql_error());
+		}
+	}*/
+
+	getQueryResult($link, 'drop table if exists users;');
+	getQueryResult($link, 'drop table if exists transactions;');
+	getQueryResult($link, 'drop table if exists accounts;');
+
+	getQueryResult($link, 'create table users (email varchar(32) primary key, password varchar(256) not null);');
+	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime(0) not null, category varchar(32) not null, asset int(2) not null);');
+	getQueryResult($link, 'create table accounts (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null);');
+	getQueryResult($link, 'insert into users values ("udubey@usc.edu", "temporary");');
+	getQueryResult($link, 'insert into accounts values (1, "udubey@usc.edu", "Visa Credit Card");');
+	getQueryResult($link, 'insert into accounts values (2, "udubey@usc.edu", "Debit Card");');
+	getQueryResult($link, 'insert into accounts values (3, "udubey@usc.edu", "Charles Schwab Savings Account");');
+	getQueryResult($link, 'insert into transactions values (1, "udubey@usc.edu", "Visa Credit Card", "Costco", -2.19, NOW(), "Dining", 0);');
+	getQueryResult($link, 'insert into transactions values (2, "udubey@usc.edu", "Debit Card", "Taco Bell", -4.22, NOW(), "Dining", 0);');
+	getQueryResult($link, 'insert into transactions values (3, "udubey@usc.edu", "Charles Schwab Savings Account", "VMware Inc.", 5000, NOW(), "Income", 1);');
+
+	function getQueryResult($link, $query) {
+		if (mysql_query($query, $link)) {
+			print '[SUCCESS] ' . $query . '<br />';
+		} else {
+			die('[FAILURE] ' . mysql_error());
+		}
+	}
+
+	mysql_close($link);
+	print 'Setup successful.';
+
+?>
+
+</body></html>
