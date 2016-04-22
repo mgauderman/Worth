@@ -30,7 +30,7 @@ $csv = array();
 if($_FILES) {
     if($_FILES['csv']['error'] == 0){
     $name = $_FILES['csv']['name'];
-    $ext = strtolower(end(explode(',', $_FILES['csv']['name'])));
+    $ext = strtolower(end(explode('.', $_FILES['csv']['name'])));
     $type = $_FILES['csv']['type'];
     $tmpName = $_FILES['csv']['tmp_name'];
 
@@ -47,7 +47,7 @@ if($_FILES) {
             $count = 0;
             while(($data = fgetcsv($handle, 1000, ' ')) !== FALSE) {
                 // echo $data[0];
-                $transaction = (explode(".",$data[0]));
+                $transaction = (explode(",",$data[0]));
                 // echo $transaction[0];
                 if ($count == 0 && $transaction[0] == "Asset"){
                     $account['transactions'][0]['asset'] = 1;
