@@ -15,7 +15,9 @@
 		die('[FAILURE] Could not connect. ' . mysql_error());
 	}*/
 
-	$db_selected = mysql_select_db('worth');
+	$db_selected = mysql_select_db('worth')
+	or die('[FAILURE] You need to create the "worth" database manually:<br /><strong>sudo mysql -u root -p<br /></strong>[enter password(s)]<strong><br />create database worth;<br />exit<br /></strong> and then revisit this page.
+		');
 
 	/*if (!$db_selected) {
 		$query = 'CREATE DATABASE worth;';
@@ -57,6 +59,7 @@
 
 	mysql_close($link);
 	print 'Setup successful.';
+	header("Location: index.php");
 
 ?>
 
