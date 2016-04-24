@@ -5,8 +5,6 @@
 	// getTotalAssets
 	// getTransactionsForGraph
 
-//	$_GET[''];
-
 	$startDate = '2016-01-17';
 	$endDate = '2016-04-17';
 	if (isset($_GET['start']) && isset($_GET['end'])) {
@@ -15,28 +13,44 @@
 	}
 
 	// TODO: loop through all in tas
-	$count = 0;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
+	$accountCount = 0;
 	if (isset($_GET['tas']) ) {
 
 		$tas = urldecode($_GET['tas']);
 		$tas = explode(',', $tas);
-		$transactions = $db->getTransactionsForGraph($startDate, $endDate, $tas[0]);
+
+		foreach( $tas as $accountToDisplay ) {
+			$transactions = $db->getTransactionsForGraph($startDate, $endDate, $accountToDisplay);
+
+			foreach($transactions as $date => $tl) {
+				$allDatesBySpace = $allDatesBySpace . ' ' . $date;
+				$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
+
+				print '<div id="transaction' . $accountCount . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+				print '<div id="transaction-data' . $accountCount . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+				$allDatesBySpace = '';
+				$allTlsBySpace = '';
+			}
+			$accountCount++;
+		}
+	}
+
+/*		$transactions = $db->getTransactionsForGraph($startDate, $endDate, $tas[0]);
 
 		foreach($transactions as $date => $tl) {
 			$allDatesBySpace = $allDatesBySpace . ' ' . $date;
 			$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
-		}
 
-		print '<div id="x' . $count . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-		print '<div id="data' . $count . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
-	}	
+			print '<div id="x' . $count . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+			print '<div id="data' . $count . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+		}
+*/
 
 	/* Liabilities */
 	$totalLiabilities = $db->getTotalLiabilities($startDate, $endDate);
-	//print var_dump($totalLiabilities);
-	$count++;
+	$count = 0;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	foreach($totalLiabilities as $date => $tl) {
