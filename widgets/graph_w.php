@@ -1,10 +1,5 @@
 <?php
 
-	// getNetWorths
-	// getTotalLiabilities
-	// getTotalAssets
-	// getTransactionsForGraph
-
 	$startDate = '2016-01-17';
 	$endDate = '2016-04-17';
 	if (isset($_GET['start']) && isset($_GET['end'])) {
@@ -12,12 +7,10 @@
 		$endDate = $_GET['end'];
 	}
 
-	// TODO: loop through all in tas
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	$accountCount = 0;
 	if (isset($_GET['tas']) ) {
-
 		$tas = urldecode($_GET['tas']);
 		$tas = explode(',', $tas);
 
@@ -27,30 +20,21 @@
 			foreach($transactions as $date => $tl) {
 				$allDatesBySpace = $allDatesBySpace . ' ' . $date;
 				$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
-
-				print '<div id="transaction' . $accountCount . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-				print '<div id="transaction-data' . $accountCount . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
-				$allDatesBySpace = '';
-				$allTlsBySpace = '';
 			}
+			
+			print '<div id="transaction-dates-' . $accountCount . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+			print '<div id="transaction-data-' . $accountCount . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+
+			$allDatesBySpace = '';
+			$allTlsBySpace = '';
 			$accountCount++;
 		}
 	}
-
-/*		$transactions = $db->getTransactionsForGraph($startDate, $endDate, $tas[0]);
-
-		foreach($transactions as $date => $tl) {
-			$allDatesBySpace = $allDatesBySpace . ' ' . $date;
-			$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
-
-			print '<div id="x' . $count . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-			print '<div id="data' . $count . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
-		}
-*/
+	print '<div id="numAccounts" style="visibility: hidden;">' . $accountCount . '</div>'; 
 
 	/* Liabilities */
 	$totalLiabilities = $db->getTotalLiabilities($startDate, $endDate);
-	$count = 0;
+//	$count = 0;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	foreach($totalLiabilities as $date => $tl) {
@@ -58,11 +42,11 @@
 		$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 	}
 
-	print '<div id="x' . $count . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-	print '<div id="data' . $count . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+	print '<div id="liabilities-dates" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+	print '<div id="liabilities-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
 
 	/* Assets */
-	$count++;
+//	$count++;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	$totalAssets = $db->getTotalAssets( $startDate, $endDate );
@@ -71,11 +55,11 @@
 		$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 	}
 
-	print '<div id="x' . $count . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-	print '<div id="data' . $count . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+	print '<div id="assets-dates" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+	print '<div id="assets-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
 
 	/* Net Worth */
-	$count++;
+//	$count++;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	$totalNetWorths = $db->getNetWorths( $startDate, $endDate );
@@ -84,8 +68,8 @@
 		$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 	}
 
-	print '<div id="x' . $count . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-	print '<div id="data' . $count . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+	print '<div id="net-worth-dates" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+	print '<div id="net-worth-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
  
 ?>
 
@@ -115,7 +99,6 @@
 		var endDate = document.getElementById("end-datepicker").value;
 
 		window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate; // TODO don't remove transactions to display, which we do here
-
 	}
 
 	var startDatePicker = $( "#start-datepicker" ).datepicker({
@@ -130,7 +113,7 @@
 	});
 	endDatePicker.datepicker( "option", "dateFormat", "yy-mm-dd" );
 
-	/* Transactions for first element in tas */
+	/* Transactions for first element in tas 
 	var data0Arr = null, x0Arr = null;
 	if ( document.getElementById('data0') != null) {
 		var data0 = document.getElementById('data0').innerHTML;
@@ -144,76 +127,91 @@
 		x0Arr = x0.split(' ');
 		x0Arr.unshift('x0');
 	}
+	*/
+
+	/* transaction-x, transaction-data-
+	 * Transactions for each account in tas */
+	var count = document.getElementById('numAccounts').innerHTML;
+	var cols = [];
+	for ( var i = 0; i < count; i++ ) {
+		var data = document.getElementById( 'transaction-data-' + i ).innerHTML;
+		if ( data != null ) {
+			data = data.split( ' ' );
+			for ( var j = 0; j < data.length; j++ ) {
+				data[j] = parseFloat(data[j]);;
+			}
+			data.unshift( 'Data-' + i );		
+
+			var dates = document.getElementById( 'transaction-dates-' + i ).innerHTML;	
+			dates = dates.split( ' ' );
+			dates.unshift( 'Dates-' + i );
+			cols.push( data );
+			cols.push( dates );
+		}
+	}
+
 
 	/* Liabilities */
-	var data1 = document.getElementById('data1').innerHTML;
-	var data1Arr = data1.split(' ');
-	for ( var i = 0; i < data1Arr.length; i++) {
-		data1Arr[i] = parseFloat(data1Arr[i]);
+	var liabilitiesData = document.getElementById('liabilities-data').innerHTML;
+	liabilitiesData = liabilitiesData.split(' ');
+	for ( var i = 0; i < liabilitiesData.length; i++) {
+		liabilitiesData[i] = parseFloat(liabilitiesData[i]);
 	}
-	data1Arr.unshift('Total Liabilities');
+	liabilitiesData.unshift('Total Liabilities');
 
-	var x1 = document.getElementById('x1').innerHTML;
-	var x1Arr = x1.split(' ');
-	x1Arr.unshift('x1');
+	var liabilitiesDates = document.getElementById('liabilities-dates').innerHTML;
+	liabilitiesDates = liabilitiesDates.split(' ');
+	liabilitiesDates.unshift('Liabilities Dates');
 
 	/* Assets */
-	var data2 = document.getElementById('data2').innerHTML;
-	var data2Arr = data2.split(' ');
-	for ( var i = 0; i < data2Arr.length; i++ ) {
-		data2Arr[i] = parseFloat(data2Arr[i]);
+	var assetsData = document.getElementById('assets-data').innerHTML;
+	assetsData = assetsData.split(' ');
+	for ( var i = 0; i < assetsData.length; i++ ) {
+		assetsData[i] = parseFloat(assetsData[i]);
 	}
-	data2Arr.unshift('Total Assets');
+	assetsData.unshift('Total Assets');
 
-	var x2 = document.getElementById('x2').innerHTML;
-	var x2Arr = x2.split(' ');
-	x2Arr.unshift('x2');
+	var assetsDates = document.getElementById('assets-dates').innerHTML;
+	assetsDates = assetsDates.split(' ');
+	assetsDates.unshift('Assets Dates');
 
 	/* Net worths */
-	var data3 = document.getElementById('data3').innerHTML;
-	var data3Arr = data3.split(' ');
-	for ( var i = 0; i < data3Arr.length; i++ ) {
-		data3Arr[i] = parseFloat(data3Arr[i]);
+	var netWorthData = document.getElementById('net-worth-data').innerHTML;
+	netWorthData = netWorthData.split(' ');
+	for ( var i = 0; i < netWorthData.length; i++ ) {
+		netWorthData[i] = parseFloat(netWorthData[i]);
 	}
-	data3Arr.unshift('Net Worth');
+	netWorthData.unshift('Net Worth');
 
-	var x3 = document.getElementById('x3').innerHTML;
-	var x3Arr = x3.split(' ');
-	x3Arr.unshift('x3');
+	var netWorthDates = document.getElementById('net-worth-dates').innerHTML;
+	netWorthDates = netWorthDates.split(' ');
+	netWorthDates.unshift('Net Worth Dates');
 
+	cols.push( liabilitiesData );
+	cols.push( assetsData );
+	cols.push( netWorthData );
+	cols.push( liabilitiesDates );
+	cols.push( assetsDates );
+	cols.push( netWorthDates );
 
+	var xs = {
+		'Total Liabilities': 'Liabilities Dates',
+		'Total Assets': 'Assets Dates',
+		'Net Worth': 'Net Worth Dates'
+	};
 
-	// var x = x1Arr;
-	// var sample = data1Arr;
+	console.log ( count );
 
-	/*var cols = [
-		data1, x1
-		//['data1', 30, 200, 100, 400, 150, 250],
-		//['data2', 50, 20, 10, 40],
-		//['x', 2016, 2017, 2018, 2019, 2021, 2022],
-		//['x2', 2015, 2017, 2018, 2023]
-	]; */
-
-	var cols = [x1Arr, 
-				x2Arr,
-				x3Arr, 
-				data1Arr, 
-				data2Arr, 
-				data3Arr];
-	if (x0Arr != null) {
-		cols.unshift(x0Arr);
-		cols.unshift(data0Arr);
+	for ( var i = 0; i < count; i++ ) {
+		xs['Data-' + i] = 'Dates-' + i;
 	}
+
+	console.log( xs );
 
 	var chart = c3.generate({
 		bindto: '#chart',
 		data: {
-			xs: {
-				'Total Liabilities': 'x1',
-				'Total Assets': 'x2',
-				'Net Worth': 'x3',
-				'Account 1': 'x0'
-			},
+			xs: xs,
 			columns: cols
 		},
 		axis: {
