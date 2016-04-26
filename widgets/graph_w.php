@@ -16,15 +16,14 @@
 		$tas = explode(',', $tas);
 		foreach( $tas as $accountToDisplay ) {
 			$transactions = $db->getTransactionsForGraph($startDate, $endDate, $accountToDisplay);
-
 			foreach($transactions as $date => $tl) {
-				print '<p>here I am inside the loops</p>';
 				$allDatesBySpace = $allDatesBySpace . ' ' . $date;
 				$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 			}
 			
-			print '<div id="transaction-dates-' . $accountCount . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-			print '<div id="transaction-data-' . $accountCount . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+			print '<div id="account-name-' . $accountCount . '" style=visibility:hidden;">' . $accountToDisplay . '</div>';
+			print '<div id="account-dates-' . $accountCount . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
+			print '<div id="account-data-' . $accountCount . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';	
 
 			$allDatesBySpace = '';
 			$allTlsBySpace = '';
@@ -91,9 +90,6 @@
 <script src="vendors/c3.min.js"></script>
 
 <script type="text/javascript">
-
-	document.body.style.zoom=0.8;
-
 	function updateGraph() {
 		var startDate = document.getElementById("start-datepicker").value;
 		var endDate = document.getElementById("end-datepicker").value;
@@ -131,43 +127,29 @@
 	});
 	endDatePicker.datepicker( "option", "dateFormat", "yy-mm-dd" );
 
-	/* Transactions for first element in tas 
-	var data0Arr = null, x0Arr = null;
-	if ( document.getElementById('data0') != null) {
-		var data0 = document.getElementById('data0').innerHTML;
-		data0Arr = data0.split(' ');
-		for ( var i = 0; i < data0Arr.length; i++) {
-			data0Arr[i] = parseFloat(data0Arr[i]);
-		}
-		data0Arr.unshift('Account 1');
-
-		var x0 = document.getElementById('x0').innerHTML;
-		x0Arr = x0.split(' ');
-		x0Arr.unshift('x0');
-	}
-	*/
-
 	/* transaction-x, transaction-data-
 	 * Transactions for each account in tas */
 	var count = document.getElementById('numAccounts').innerHTML;
 	var cols = [];
+	var accounts = [];
 	for ( var i = 0; i < count; i++ ) {
-		var data = document.getElementById( 'transaction-data-' + i ).innerHTML;
-		if ( data !== null ) {
+		var account = document.getElementById( 'account-name-' + i ).innerHTML;
+		if ( account !== null ) {
+			accounts.push(account);
+			var data = document.getElementById( 'account-data-' + i ).innerHTML;
 			data = data.split( ' ' );
 			for ( var j = 0; j < data.length; j++ ) {
 				data[j] = parseFloat(data[j]);;
 			}
-			data.unshift( 'Data-' + i );		
+			data.unshift( account );		
 
-			var dates = document.getElementById( 'transaction-dates-' + i ).innerHTML;	
+			var dates = document.getElementById( 'account-dates-' + i ).innerHTML;	
 			dates = dates.split( ' ' );
 			dates.unshift( 'Dates-' + i );
 			cols.push( data );
 			cols.push( dates );
 		}
 	}
-
 
 	/* Liabilities */
 	var liabilitiesData = document.getElementById('liabilities-data').innerHTML;
@@ -218,13 +200,9 @@
 		'Net Worth': 'Net Worth Dates'
 	};
 
-	console.log ( count );
-
 	for ( var i = 0; i < count; i++ ) {
-		xs['Data-' + i] = 'Dates-' + i;
+		xs[accounts[i]] = 'Dates-' + i;
 	}
-
-	console.log( xs );
 
 	var chart = c3.generate({
 		bindto: '#chart',
@@ -241,12 +219,13 @@
 			}
 		},
 		color: {
-			pattern: [ '#990000', '#ffff00', '#000099', '#ff6600', '#660033' ]
+			pattern: [ '#E91E63', '#2196F3', '#4CAF50', '#FFF176', '#FF5722', '#f44336', '#3F51B5', '#009688', '#FF9800', '#212121', '#D500F9' ]
 		}, 
 		legend: {
 			position: 'right'
 		}
 	});
-</script>
 
-<!--var chartData = <?php echo json_encode($chartData)?>;-->
+	// make set color for liabilities, net worth and assets
+	// change legend to have account names
+</script>
