@@ -36,6 +36,14 @@ $email = $_SESSION["user_email"];
 		<link href="views/dashboard.css" rel="stylesheet">
 
 		<style>
+			body {
+			    background-color: #333333;
+			}
+
+			h2 {
+				text-align: center;
+			}
+
 			#header {
 			    text-align:center;
 			    padding:5px;
@@ -72,7 +80,6 @@ $email = $_SESSION["user_email"];
 			    text-align: right;
 			}     
 
-
 			.checking {
 			     width: 13px;
 			    height: 13px;
@@ -83,6 +90,7 @@ $email = $_SESSION["user_email"];
 			    top: -1px;
 			    *overflow: hidden;
 			}
+
 			.pointer {
 			    cursor: pointer;
 			}
@@ -102,19 +110,16 @@ $email = $_SESSION["user_email"];
 			}
 			table.table.portfolioWidget td,
 			table.table.portfolioWidget th {
-			     border-radius: 0px !important;
+			    border-radius: 0px !important;
 			    height: 40px;
 			    text-align: center;
 			}
 
 			.portfolioPage td {
-
 			    background-color: lightgray;
 			    border-radius: 10px !important;
 			    padding: 20px;
-			    
 			    vertical-align: top;
-
 			}
 			.pageHeader {
 			    
@@ -123,10 +128,6 @@ $email = $_SESSION["user_email"];
 			.moduleTitle {
 			    margin-top:0px !important;
 			    text-align: center !important;
-			}
-
-			body {
-			    background-color: #333333;
 			}
 
 			.regAndLogForm {
@@ -159,14 +160,6 @@ $email = $_SESSION["user_email"];
 			.error {
 			    color:#FF0000;
 			}
-
-
-
-
-
-
-
-
 		</style>
 
 	</head>
@@ -182,44 +175,37 @@ $email = $_SESSION["user_email"];
 					<tr>
 						<!-- Import csv -->
 						<td style ="width: 400px; height: 80px; text-align:center; padding-top:0px">
-							<?php	
-								print '<h2>CSV Import</h2>';
-								require_once('widgets/csv_w.php');
-							?>
+							<h2> CSV Import </h2>
+							<?php require_once('widgets/csv_w.php');?>
 						</td>
 						<!-- Search -->
-						<td style="width:50%;     text-align: -webkit-center;">
+						<td style="width:50%; text-align: -webkit-center;">
 						
 						</td>
 
 						<!-- Date, User Manual, Logout -->
 						<td style="vertical-align:middle;width:25%; text-align:center ">
-							<a href="php/logout.php" class = "btn btn-default" style="width:70%">Logout</a>
-						
-
+							<a href="php/logout.php" class="btn btn-default" style="width:70%">Logout</a>
 						</td>
 					</tr>
 
 					<!-- Middle -->
 					<tr>
 						<!-- Accounts -->
-						<td  style="padding-top:0px;height:480px; width:25%; padding-top:0px;">
-							<?php
-							print '<h2 style=" text-align:center;">Accounts</h2>';
-							require_once('widgets/accounts_w.php');
-							?>
+						<td class="accountsWidget" style="padding-top:0px;height:480px; width:25%; padding-top:0px;">
+							<h2> Accounts </h2>
+							<?php require_once('widgets/accounts_w.php'); ?>
 						</td>
 
 						<!-- Graph -->
-
-						<td class="graphTD" style="vertical-align: top; border-collapse: collapse;">
+						<td class="graphWidget" style="vertical-align: top; border-collapse: collapse;">
+							<h2> Graph </h2>
 							<?php require_once('widgets/graph_w.php');?>
-
 						</td>
 
-						<!--Other thing -->
-						<td style="padding-top:0px">
-							
+						<!--Budget -->
+						<td class="budgetWidget" style="padding-top:0px">	
+							<h2> Monthly Budget </h2>
 						</td>
 						
 					</tr>
@@ -227,15 +213,13 @@ $email = $_SESSION["user_email"];
 					<!-- Bottom -->
 					<tr>
 						<!-- Bottom Left -->
-						<td class="buySellWidget" style="    height: 255px;padding-top: 0px;  border-collapse: collapse;">
+						<td class="buySellWidget" style="height: 255px;padding-top: 0px;  border-collapse: collapse;">
 						
 						</td>
 						<!-- Transactions-->
-						<td style="padding-top:0px;height:200px ">
-						<?php
-							print '<h2 style=" text-align:center;">Transactions</h2>';
-							require_once('widgets/transactions_w.php');
-						?>
+						<td class="transactionsWidget" style="padding-top:0px;height:200px ">
+							<h2>Transactions</h2>
+							<?php require_once('widgets/transactions_w.php');?>
 						</td>
 
 						<!-- Bottom Right-->
