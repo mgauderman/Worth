@@ -98,7 +98,7 @@ class WorthDB {
 		$transactionsForGraph = array();
 		$sum = 0;
 		while ($row = mysql_fetch_array($result)) {
-			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$sum = $sum + floatval(str_replace(',', '', number_format($row['amount'], 2)));
 			$transactionsForGraph[split(' ', $row['date'])[0]] = $sum;
 		}
 		return $transactionsForGraph;
@@ -113,7 +113,7 @@ class WorthDB {
 			return $totalAssets;
 		}
 		while ($row = mysql_fetch_array($result)) {
-			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$sum = $sum + floatval(str_replace(',', '', number_format($row['amount'], 2)));
 			$totalAssets[split(' ', $row['date'])[0]] = $sum;
 		}
 		return $totalAssets;
@@ -128,7 +128,7 @@ class WorthDB {
 			return $totalAssets;
 		}
 		while ($row = mysql_fetch_array($result)) {
-			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$sum = $sum + floatval(str_replace(',', '', number_format($row['amount'], 2)));
 			$totalAssets[split(' ', $row['date'])[0]] = (-1) * $sum;
 		}
 		return $totalAssets;
@@ -143,7 +143,7 @@ class WorthDB {
 			return $netWorths;
 		}
 		while ($row = mysql_fetch_array($result)) {
-			$sum = $sum + floatval(number_format($row['amount'], 2));
+			$sum = $sum + floatval(str_replace(',', '', number_format($row['amount'], 2)));
 			$netWorths[split(' ', $row['date'])[0]] = $sum;
 		}
 		return $netWorths;
@@ -173,6 +173,24 @@ class WorthDB {
 				$this->getQueryResult($query);
 			}
 		}
+	}
+
+	public function createUser($email, $password) {
+		// returns false if the user is already in the database, otherwise true
+		$query = 'INSERT INTO users VALUES ("' . $email . '", "' . $password . '");';
+		if ($this->getQueryResult($query)) {
+			return true;
+		} else {
+			return false;
+		}
+
+		/*$query = 'SELECT * FROM users WHERE email="' . $email . '";';
+		if ($this->getQueryResult($query)) {
+			return false; // user already exists
+		} else {
+			$query = 'INSERT INTO users VALUES ("' . $email . '", "' . $password . '");';
+			$return $this->getQueryResult($query);
+		}*/
 	}
 
 }

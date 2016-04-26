@@ -43,6 +43,10 @@ foreach ($accounts as $accountName) {
 	// }
 	$ischecked = "";
 
+	if (isset($_GET['start']) && isset($_GET['end'])) {
+		$start = $_GET['start'];
+		$end = $_GET['end'];
+	}
 	$link = './?tas=' . urlencode($accountName);
 	if (isset($_GET['tas'])) {
 		$link = './?tas=' . urlencode($accountName . ',') . urlencode($_GET['tas']);
@@ -64,6 +68,16 @@ foreach ($accounts as $accountName) {
 					$link = '.';
 				}
 			}
+		}
+	}
+
+	if (isset($_GET['start']) && isset($_GET['end'])) {
+		$start = $_GET['start'];
+		$end = $_GET['end'];
+		if ($link == '.') {
+			$link = $link . '?start=' . $start . '&end=' . $end;
+		} else {
+			$link = $link . '&start=' . $start . '&end=' . $end;
 		}
 	}
 
