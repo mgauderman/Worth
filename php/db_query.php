@@ -175,6 +175,24 @@ class WorthDB {
 		}
 	}
 
+	public function createUser($email, $password) {
+		// returns false if the user is already in the database, otherwise true
+		$query = 'INSERT INTO users VALUES ("' . $email . '", "' . $password . '");';
+		if ($this->getQueryResult($query)) {
+			return true;
+		} else {
+			return false;
+		}
+
+		/*$query = 'SELECT * FROM users WHERE email="' . $email . '";';
+		if ($this->getQueryResult($query)) {
+			return false; // user already exists
+		} else {
+			$query = 'INSERT INTO users VALUES ("' . $email . '", "' . $password . '");';
+			$return $this->getQueryResult($query);
+		}*/
+	}
+
 }
 
 
