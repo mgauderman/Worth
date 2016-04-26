@@ -14,14 +14,13 @@
 		</thead>
 	</table>
 
-	<input type="input" id="new-budget" value="new-budget"></input>
-	<input type="input" id="category" value="category"></input>
+	Category: <input type="input" id="category"></input>
+	Budget: <input type="input" id="new-budget"></input>
 	<input type="submit" onclick="updateBudget()"></input>
 </div>
 
 <script type="text/javascript">
-	function updateBudget(e) {
-		e.preventDefault();
+	function updateBudget() {
 		var newBudget = document.getElementById("new-budget").innerHTML;
 		var category = document.getElementById("category").innerHTML;
 		if ( newBudget !== null && category !== null ) {
