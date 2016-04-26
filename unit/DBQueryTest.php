@@ -28,6 +28,7 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 		$this->assertTrue($db->credentialsValid("udubey@usc.edu","temporary"));
 		$this->assertFalse($db->credentialsValid("udubey@usc.edu","foo"));
 		$this->assertFalse($db->credentialsValid("udubey@usc.edu","abc"));
+		$query = 'INSERT INTO users (email, password) VALUES ("test", "blah");';
 	}
 
 	function testsetEmail() {
@@ -195,6 +196,22 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 		}
 
 		$db->getQueryResult('DELETE FROM transactions WHERE email="test@usc.edu";');
+	}
+
+	function testcreateUser() {
+		$db = new WorthDB();
+		$db->connect();
+
+		$db->getQueryResult('INSERT INTO users VALUES ("asdf@asdf.edu", "pass");');
+		$this->assertFalse($db->createUser("asdf@asdf.edu", 'blahblah'));
+		$db->getQueryResult('DELETE FROM users WHERE email="asdf@asdf.edu";');
+
+		$this->assertTrue($db->createUser('tempor@blah.com', 'password'));
+		$result = $db->getQueryResult('SELECT * FROM users WHERE email="tempor@blah.com";');
+		while ($row = mysql_fetch_array($result)) {
+			$this->assertEquals($row['email'], 'tempor@blah.com');
+			$this->assertEquals($row['password'], 'password');
+		}
 	}
 
 	function testaddTransactions() {

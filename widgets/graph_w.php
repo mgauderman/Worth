@@ -1,10 +1,11 @@
 <?php
-
-	$startDate = '2016-01-17';
-	$endDate = '2016-04-17';
-	if (isset($_GET['start']) && isset($_GET['end'])) {
-		$startDate = $_GET['start'];
-		$endDate = $_GET['end'];
+	$startDate = date('Y-m-d', strtotime('-3 months')); // 3 months ago
+	$endDate = date('Y-m-d'); // today's date
+	if (isset($_GET['start'])) {
+		$startDate = urldecode($_GET['start']);
+	}
+	if (isset($_GET['end'])) {
+		$endDate = urldecode($_GET['end']);
 	}
 
 	$allDatesBySpace = '';
@@ -13,7 +14,6 @@
 	if (isset($_GET['tas']) ) {
 		$tas = urldecode($_GET['tas']);
 		$tas = explode(',', $tas);
-
 		foreach( $tas as $accountToDisplay ) {
 			$transactions = $db->getTransactionsForGraph($startDate, $endDate, $accountToDisplay);
 
@@ -35,7 +35,6 @@
 
 	/* Liabilities */
 	$totalLiabilities = $db->getTotalLiabilities($startDate, $endDate);
-//	$count = 0;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	foreach($totalLiabilities as $date => $tl) {
@@ -47,7 +46,6 @@
 	print '<div id="liabilities-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
 
 	/* Assets */
-//	$count++;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	$totalAssets = $db->getTotalAssets( $startDate, $endDate );
@@ -60,7 +58,6 @@
 	print '<div id="assets-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
 
 	/* Net Worth */
-//	$count++;
 	$allDatesBySpace = '';
 	$allTlsBySpace = '';
 	$totalNetWorths = $db->getNetWorths( $startDate, $endDate );
@@ -95,11 +92,31 @@
 
 <script type="text/javascript">
 
+	document.body.style.zoom=0.8;
+
 	function updateGraph() {
 		var startDate = document.getElementById("start-datepicker").value;
 		var endDate = document.getElementById("end-datepicker").value;
 
-		window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate; // TODO don't remove transactions to display, which we do here
+		if (location.search == "" || !location.search.contains("tas=")) {
+			window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate;
+		} else if (location.search.contains("&tas=") && !location.search.contains("start=")) {
+			var tasParams = location.search.substring(location.search.indexOf("&tas="));
+			window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate + tasParams;
+		} else if (location.search.contains("?tas=") && !location.search.contains("start=")) {
+			var tasParams = location.search.substring(location.search.indexOf("?tas="));
+			window.location = "http://localhost/worth" + tasParams + "&start=" + startDate + "&end=" + endDate;
+		} else if (location.search.contains("&tas=") && location.search.contains("?start=")) {
+			window.location = "http://localhost/worth" + "?start=" + startDate + "&end=" + endDate + location.search.substring(location.search.indexOf("&tas"));
+		} else if (location.search.contains("?tas=") && location.search.contains("&start=")) {
+			window.location = "http://localhost/worth" + location.search.substring(location.search.indexOf("?tas="), location.search.indexOf("&start=")) + "&start=" + startDate + "&end=" + endDate;
+		} else {
+			console.log('problem in graph_w.php');
+			console.log(startDate);
+			console.log(endDate);
+			console.log(location.search);
+		}
+
 	}
 
 	var startDatePicker = $( "#start-datepicker" ).datepicker({
@@ -231,12 +248,5 @@
 		}
 	});
 </script>
-
-
-
-<script type="text/javascript">
-	
-</script>
-
 
 <!--var chartData = <?php echo json_encode($chartData)?>;-->
