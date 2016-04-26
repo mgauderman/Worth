@@ -75,7 +75,7 @@
  
 ?>
 
-<div style="font-color: red" id="chart-container">
+<div id="chart-container">
 	<div id="chart"></div>
 	<p> 
 		Start Date: <input type="text" id="start-datepicker" />
@@ -96,12 +96,12 @@
 
 <script type="text/javascript">
 
-	function updateGraph() {
+	function updateGraph(e) {
+		e.preventDefault();
 		var startDate = document.getElementById("start-datepicker").value;
 		var endDate = document.getElementById("end-datepicker").value;
 
 		window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate; // TODO don't remove transactions to display, which we do here
-
 	}
 
 	var startDatePicker = $( "#start-datepicker" ).datepicker({
