@@ -85,6 +85,7 @@ class WorthDB {
 	public function deleteAccount($accountName) {
 		$query = "DELETE FROM accounts WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
 		$result = $this->getQueryResult($query);
+		$query = "DELETE FROM transactions WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
 		return $result;
 	}
 
@@ -149,6 +150,7 @@ class WorthDB {
 	}
 
 	public function addTransactions($accountName, $transactions) {
+		$this->deleteAccount($accountName);
 		if (in_array($accountName, $this->getAccounts())) {
 			foreach($transactions as $transaction) {
 				$isAssetAccount = $transactions[0]['asset'];

@@ -28,6 +28,7 @@ class DB_QueryTest extends PHPUnit_Framework_Testcase {
 		$this->assertTrue($db->credentialsValid("udubey@usc.edu","temporary"));
 		$this->assertFalse($db->credentialsValid("udubey@usc.edu","foo"));
 		$this->assertFalse($db->credentialsValid("udubey@usc.edu","abc"));
+		$query = 'INSERT INTO users (email, password) VALUES ("test", "blah");';
 	}
 
 	function testsetEmail() {
