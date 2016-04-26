@@ -18,6 +18,7 @@
 			$transactions = $db->getTransactionsForGraph($startDate, $endDate, $accountToDisplay);
 
 			foreach($transactions as $date => $tl) {
+				print '<p>here I am inside the loops</p>';
 				$allDatesBySpace = $allDatesBySpace . ' ' . $date;
 				$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 			}
@@ -135,7 +136,7 @@
 	var cols = [];
 	for ( var i = 0; i < count; i++ ) {
 		var data = document.getElementById( 'transaction-data-' + i ).innerHTML;
-		if ( data != null ) {
+		if ( data !== null ) {
 			data = data.split( ' ' );
 			for ( var j = 0; j < data.length; j++ ) {
 				data[j] = parseFloat(data[j]);;
