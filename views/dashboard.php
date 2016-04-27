@@ -174,11 +174,11 @@ $email = $_SESSION["user_email"];
 			<thead>
 			</thead>
 				<tbody>
-					<!-- Top -->
+					<!-- Top -->	
 					<tr>
 						<!-- Import csv -->
 						<td style ="height:10%;text-align:center; padding-top:0px">
-							<h2> CSV Import </h2>
+							<h3> CSV Import </h3>
 							<?php require_once('widgets/csv_w.php');?>
 						</td>
 						<!-- Search -->
@@ -200,7 +200,7 @@ $email = $_SESSION["user_email"];
 					<tr>
 						<!-- Accounts -->
 						<td rowspan="2" class="accountsWidget" style="padding-top:0px; padding-top:0px;">
-							<h2> Accounts </h2>
+							<h3> Accounts </h3>
 							<?php require_once('widgets/accounts_w.php'); ?>
 						</td>
 
@@ -211,7 +211,7 @@ $email = $_SESSION["user_email"];
 
 						<!--Budget -->
 						<td rowspan="2" class="budgetWidget" style="padding-top:0px">	
-							<h2> Monthly Budget </h2>
+							<h3> Monthly Budget </h3>
 						</td>
 						
 					</tr>
@@ -223,9 +223,11 @@ $email = $_SESSION["user_email"];
 						
 						</td> -->
 						<!-- Transactions-->
-						<td class="transactionsWidget" style="padding-top:0px">
-							<h2>Transactions</h2>
-							<?php require_once('widgets/transactions_w.php');?>
+						<td class="transactionsWidget" style="padding-top:0px;overflow-y:auto">
+							<h3>Transactions</h3>
+							<div style="overflow-y:auto; max-height:70%;">
+								<?php require_once('widgets/transactions_w.php');?>
+								</div>
 						</td>
 
 						<!-- Bottom Right-->
