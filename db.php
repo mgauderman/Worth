@@ -37,6 +37,7 @@
 	getQueryResult($link, 'drop table if exists users;');
 	getQueryResult($link, 'drop table if exists transactions;');
 	getQueryResult($link, 'drop table if exists accounts;');
+	getQueryResult($link, 'drop table if exists budgets;');
 
 	getQueryResult($link, 'create table users (email varchar(32) primary key, password varchar(256) not null);');
 	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime(0) not null, category varchar(32) not null, asset int(2) not null);');
@@ -45,12 +46,18 @@
 	getQueryResult($link, 'insert into accounts values (1, "udubey@usc.edu", "Visa Credit Card");');
 	getQueryResult($link, 'insert into accounts values (2, "udubey@usc.edu", "Debit Card");');
 	getQueryResult($link, 'insert into accounts values (3, "udubey@usc.edu", "Charles Schwab Savings Account");');
-	getQueryResult($link, 'insert into transactions values (1, "udubey@usc.edu", "Visa Credit Card", "Costco", -370.19, "2016-03-30", "Dining", 0);');
-	getQueryResult($link, 'insert into transactions values (2, "udubey@usc.edu", "Debit Card", "Taco Bell", -4.22, "2015-09-09", "Dining", 0);');
-	getQueryResult($link, 'insert into transactions values (3, "udubey@usc.edu", "Charles Schwab Savings Account", "VMware Inc.", 1000, "2012-04-02", "Income", 1);');
+	getQueryResult($link, 'insert into transactions values (1, "udubey@usc.edu", "Visa Credit Card", "Costco", -370.19, "2016-03-30", "Food & Groceries", 0);');
+	getQueryResult($link, 'insert into transactions values (2, "udubey@usc.edu", "Debit Card", "Taco Bell", -4.22, "2015-09-09", "Food & Groceries", 0);');
+	getQueryResult($link, 'insert into transactions values (3, "udubey@usc.edu", "Charles Schwab Savings Account", "VMware Inc.", 1000, "2012-04-02", "Savings", 1);');
 	getQueryResult($link, 'insert into transactions values (6, "udubey@usc.edu", "Charles Schwab Savings Account", "Google Inc.", 400, "2014-11-28", "Income", 1);');
-	getQueryResult($link, 'insert into transactions values (4, "udubey@usc.edu", "Debit Card", "Chick-fil-a", -75.78, "2015-05-27", "Dining", 0);');
-	getQueryResult($link, 'insert into transactions values (5, "udubey@usc.edu", "Debit Card", "Century 16", 800, "2016-02-07", "Movies", 0);');
+	getQueryResult($link, 'insert into transactions values (4, "udubey@usc.edu", "Debit Card", "Chick-fil-a", -75.78, "2015-05-27", "Food & Groceries", 0);');
+	getQueryResult($link, 'insert into transactions values (5, "udubey@usc.edu", "Debit Card", "Century 16", 800, "2016-02-07", "Leisure & Entertainment", 0);');
+	getQueryResult($link, 'insert into transactions values (7, "udubey@usc.edu", "Charles Schwab Savings Account", "Parasailing Co.", -1000, NOW(), "Leisure & Entertainment", 0);');
+	getQueryResult($link, 'insert into transactions values (8, "udubey@usc.edu", "Visa Credit Card", "Rock Climbing Co.", -500, "2016-04-01", "Leisure & Entertainment", 0);');
+
+	getQueryResult($link, 'create table budgets (id int(100) unsigned auto_increment primary key, email varchar(32) not null, category varchar(32) not null, budget float(32) not null);');
+	getQueryResult($link, 'insert into budgets values (1, "udubey@usc.edu", "Food & Groceries", -350);');
+	getQueryResult($link, 'insert into budgets values (2, "udubey@usc.edu", "Leisure & Entertainment", -100);');
 
 	function getQueryResult($link, $query) {
 		if (mysql_query($query, $link)) {
