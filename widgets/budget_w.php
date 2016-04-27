@@ -2,7 +2,7 @@
 	$categories = $db->getCategories();
 ?>
 <div>
-	<table class="table table-striped">
+	<table class="table table-striped" id="budget-table">
 		<thead>
 		    <tr>
 				<th> Category </th>
@@ -38,7 +38,7 @@
 
 	Category: <input type="input" id="category"></input>
 	Budget: <input type="input" id="new-budget"></input>
-	<input type="submit" onclick="updateBudget()"></input>
+	<input type="submit" id="budget-submit" onclick="updateBudget()"></input>
 </div>
 
 <script type="text/javascript">
