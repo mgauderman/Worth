@@ -21,16 +21,16 @@
 				$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 			}
 			
-			print '<div id="account-name-' . $accountCount . '" style=visibility:hidden;">' . $accountToDisplay . '</div>';
-			print '<div id="account-dates-' . $accountCount . '" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-			print '<div id="account-data-' . $accountCount . '" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';	
+			print '<div id="account-name-' . $accountCount . '" style=display:none;">' . $accountToDisplay . '</div>';
+			print '<div id="account-dates-' . $accountCount . '" style="display:none;">' . substr($allDatesBySpace, 1) . '</div>';
+			print '<div id="account-data-' . $accountCount . '" style="display:none;">' . substr($allTlsBySpace, 1) . '</div>';	
 
 			$allDatesBySpace = '';
 			$allTlsBySpace = '';
 			$accountCount++;
 		}
 	}
-	print '<div id="numAccounts" style="visibility: hidden;">' . $accountCount . '</div>'; 
+	print '<div id="numAccounts" style="display:none;">' . $accountCount . '</div>'; 
 
 	/* Liabilities */
 	$totalLiabilities = $db->getTotalLiabilities($startDate, $endDate);
@@ -41,8 +41,8 @@
 		$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 	}
 
-	print '<div id="liabilities-dates" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-	print '<div id="liabilities-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+	print '<div id="liabilities-dates" style="display:none;">' . substr($allDatesBySpace, 1) . '</div>';
+	print '<div id="liabilities-data" style="display:none;">' . substr($allTlsBySpace, 1) . '</div>';
 
 	/* Assets */
 	$allDatesBySpace = '';
@@ -53,8 +53,8 @@
 		$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 	}
 
-	print '<div id="assets-dates" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-	print '<div id="assets-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+	print '<div id="assets-dates" style="display:none;">' . substr($allDatesBySpace, 1) . '</div>';
+	print '<div id="assets-data" style="display:none;">' . substr($allTlsBySpace, 1) . '</div>';
 
 	/* Net Worth */
 	$allDatesBySpace = '';
@@ -65,8 +65,8 @@
 		$allTlsBySpace = $allTlsBySpace . ' ' . $tl;
 	}
 
-	print '<div id="net-worth-dates" style="visibility:hidden;">' . substr($allDatesBySpace, 1) . '</div>';
-	print '<div id="net-worth-data" style="visibility:hidden;">' . substr($allTlsBySpace, 1) . '</div>';
+	print '<div id="net-worth-dates" style="display:none;">' . substr($allDatesBySpace, 1) . '</div>';
+	print '<div id="net-worth-data" style="display:none;">' . substr($allTlsBySpace, 1) . '</div>';
  
 ?>
 
