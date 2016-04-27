@@ -46,7 +46,7 @@ class WorthDB {
 	}
 
 	public function getTransactions($accountName) {
-		$query = "SELECT accountName, merchant, amount, date, category FROM transactions WHERE email='" . $this->email . "' AND accountName = '" . $accountName . "' ORDER BY date;";
+		$query = "SELECT accountName, merchant, amount, `date`, category FROM transactions WHERE email='" . $this->email . "' AND accountName = '" . $accountName . "' ORDER BY `date`;";
 		$result = $this->getQueryResult($query);
 		$transactions = array();
 		$i = 0;
@@ -86,11 +86,12 @@ class WorthDB {
 		$query = "DELETE FROM accounts WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
 		$result = $this->getQueryResult($query);
 		$query = "DELETE FROM transactions WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
+		$result = $this->getQueryResult($query);
 		return $result;
 	}
 
 	public function getTransactionsForGraph($startDate, $endDate, $accountName) {
-		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND accountName = "' . $accountName . '" AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$query = 'SELECT `date`, amount FROM transactions WHERE email = "' . $this->email . '" AND accountName = "' . $accountName . '" AND `date` >= "' . $startDate . '" AND `date` <= "' . $endDate . ' 23:59:59" ORDER BY `date` ASC;';
 		$result = $this->getQueryResult($query);
 		if ($result == null) {
 			return array();
@@ -105,9 +106,9 @@ class WorthDB {
 	}
 
 	public function getTotalAssets($startDate, $endDate) {
-		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 1 AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$query = 'SELECT `date`, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 1 AND `date` >= "' . $startDate . '" AND `date` <= "' . $endDate . ' 23:59:59" ORDER BY `date` ASC;';
 		$result = $this->getQueryResult($query);
-		$totalAssets = array(); // map from date (as string) to number
+		$totalAssets = array(); // map from `date` (as string) to number
 		$sum = 0;
 		if ($result == null) {
 			return $totalAssets;
@@ -120,9 +121,9 @@ class WorthDB {
 	}
 
 	public function getTotalLiabilities($startDate, $endDate) {
-		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 0 AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$query = 'SELECT `date`, amount FROM transactions WHERE email = "' . $this->email . '" AND asset = 0 AND `date` >= "' . $startDate . '" AND `date` <= "' . $endDate . ' 23:59:59" ORDER BY `date` ASC;';
 		$result = $this->getQueryResult($query);
-		$totalAssets = array(); // map from date (as string) to number
+		$totalAssets = array(); // map from `date` (as string) to number
 		$sum = 0;
 		if ($result == null) {
 			return $totalAssets;
@@ -135,9 +136,9 @@ class WorthDB {
 	}
 
 	public function getNetWorths($startDate, $endDate) {
-		$query = 'SELECT date, amount FROM transactions WHERE email = "' . $this->email . '" AND date >= "' . $startDate . '" AND date <= "' . $endDate . ' 23:59:59" ORDER BY date ASC;';
+		$query = 'SELECT `date`, amount FROM transactions WHERE email = "' . $this->email . '" AND `date` >= "' . $startDate . '" AND `date` <= "' . $endDate . ' 23:59:59" ORDER BY `date` ASC;';
 		$result = $this->getQueryResult($query);
-		$netWorths = array(); // map from date (as string) to number
+		$netWorths = array(); // map from `date` (as string) to number
 		$sum = 0;
 		if ($result == null) {
 			return $netWorths;
@@ -155,9 +156,9 @@ class WorthDB {
 			foreach($transactions as $transaction) {
 				$isAssetAccount = $transactions[0]['asset'];
 				if ($isAssetAccount == 1) {
-					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category, asset) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '", 1);';
+					$query = 'INSERT INTO transactions (email, accountName, `date`, amount, merchant, category, asset) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '", 1);';
 				} else {
-					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '");';
+					$query = 'INSERT INTO transactions (email, accountName, `date`, amount, merchant, category) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '");';
 				}
 				$this->getQueryResult($query);
 			}
@@ -166,9 +167,9 @@ class WorthDB {
 			$isAssetAccount = $transactions[0]['asset'];
 			foreach($transactions as $transaction) {
 				if ($isAssetAccount == 1) {
-					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category, asset) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '", 1);';
+					$query = 'INSERT INTO transactions (email, accountName, `date`, amount, merchant, category, asset) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '", 1);';
 				} else {
-					$query = 'INSERT INTO transactions (email, accountName, date, amount, merchant, category) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '");';
+					$query = 'INSERT INTO transactions (email, accountName, `date`, amount, merchant, category) VALUES ("' . $this->email . '", "' . $accountName . '", "' . $transaction['date'] . '", ' . $transaction['amount'] . ', "' . $transaction['merchant'] . '", "' . $transaction['category'] . '");';
 				}
 				$this->getQueryResult($query);
 			}
