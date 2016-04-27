@@ -181,24 +181,24 @@ $email = $_SESSION["user_email"];
 							<?php require_once('widgets/csv_w.php');?>
 						</td>
 						<!-- Search -->
-						<td style="width:50%; text-align: -webkit-center; " >
+						<td style="width:50%; max-width:50%; text-align: -webkit-center; " >
 							<div style="height:100%; width:100%;  background-image: url('views/Halfondlogotr.png');
-    background-position-x: center; background-repeat: no-repeat; background-size: contain;">
+    background-position-x: center;background-position: center; background-repeat: no-repeat; background-size: contain; ">
 								
 							</div>
 <!-- 							<img style="    width: 100%;  height: auto;"src="views/Halfondlogotr.png"/>
  -->					</td>
 
 						<!-- Date, User Manual, Logout -->
-						<td style="vertical-align:middle;width:25%; text-align:center ">
-							<a href="php/logout.php" class="btn btn-default" style="width:70%">Logout</a>
+						<td style="vertical-align:middle;width:25%; max-width:25%; text-align:center ">
+							<a href="php/logout.php" class="btn btn-default" style="width:300px">Logout</a>
 						</td>
 					</tr>
 
 					<!-- Middle -->
 					<tr>
 						<!-- Accounts -->
-						<td rowspan="2" class="accountsWidget" style="padding-top:0px; padding-top:0px;">
+						<td rowspan="2" class="accountsWidget" style="padding-top:0px; padding-top:0px;width:20%">
 							<h3> Accounts </h3>
 							<?php require_once('widgets/accounts_w.php'); ?>
 						</td>
@@ -222,9 +222,9 @@ $email = $_SESSION["user_email"];
 						
 						</td> -->
 						<!-- Transactions-->
-						<td class="transactionsWidget" style="padding-top:0px;    padding-bottom: 10px;overflow-y:auto">
+						<td class="transactionsWidget" style="padding-top:0px; max-height:30%;    padding-bottom: 10px">
 							<h3>Transactions</h3>
-							<div style="overflow-y:auto; max-height:70%;">
+							<div style="overflow-y:scroll; max-height:70%;">
 								<?php require_once('widgets/transactions_w.php');?>
 								</div>
 						</td>
