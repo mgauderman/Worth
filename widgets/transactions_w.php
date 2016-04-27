@@ -14,10 +14,12 @@ if (isset($_GET['tas'])) {
 }
 
 ?>
-<table class="table table-striped">
+
+
+<table class="table table-striped trans-table sortable-theme-bootstrap;"style="margin-bottom: 0px !important;" data-sortable>
 	<thead>
 	    <tr>
-	    	<th>Account</th>
+	    	<th data-sortable="true">Account</th>
 			<th>Date</th>
 			<th>Amount</th>
 			<th>Merchant</th>
@@ -53,3 +55,13 @@ if (isset($_GET['tas'])) {
 		</tbody>
 	</thead>
 </table>
+
+<style>
+table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"] {
+
+}
+.trans-table td {
+	background-color: transparent;
+	border-radius: 0px !important;
+}
+</style>

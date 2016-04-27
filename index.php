@@ -11,8 +11,8 @@ ini_set('display_errors', 1);
 require_once("php/db_query.php");
 $db = new WorthDB();
 $db->connect();
-
-if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "") {
+//if Log in is clicked
+if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "" && $_POST["action"] == "signin") {
 
 	$email = $_POST["inputEmail"];
 	$password = $_POST["inputPassword"];
@@ -27,6 +27,10 @@ if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "") {
 
 }
 
+//if Register is clicked
+else if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "" && $_POST["action"] == "register") {
+
+}
 function encrypt($pass_word) {
 	return $pass_word;
 }

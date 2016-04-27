@@ -19,7 +19,7 @@ $email = $_SESSION["user_email"];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%">
 
 	<head>
 
@@ -29,6 +29,7 @@ $email = $_SESSION["user_email"];
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="Worth for CSCI 310, Group I">
 		<meta name="author" content="Utkash Dubey">
+		<link rel="stylesheet" href="vendors/sortable-theme-bootstrap.css" />
 		<link rel="icon" href="favicon.ico">
 		<!-- Latest compiled and minified CSS -->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -38,6 +39,7 @@ $email = $_SESSION["user_email"];
 		<style>
 			body {
 			    background-color: #333333;
+			    height: 100%;
 			}
 
 			h2 {
@@ -167,21 +169,25 @@ $email = $_SESSION["user_email"];
 	<body>
 
 
-		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100% ">
+		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100%; height:100%">
 			<thead>
 			</thead>
 				<tbody>
-					<!-- Top -->
+					<!-- Top -->	
 					<tr>
 						<!-- Import csv -->
-						<td style ="width: 400px; height: 80px; text-align:center; padding-top:0px">
-							<h2> CSV Import </h2>
+						<td style ="height:10%;text-align:center; padding-top:0px">
+							<h3> CSV Import </h3>
 							<?php require_once('widgets/csv_w.php');?>
 						</td>
 						<!-- Search -->
-						<td style="width:50%; text-align: -webkit-center;">
-						
-						</td>
+						<td style="width:50%; text-align: -webkit-center; " >
+							<div style="height:100%; width:100%;  background-image: url('views/Halfondlogotr.png');
+    background-position-x: center; background-repeat: no-repeat; background-size: contain;">
+								
+							</div>
+<!-- 							<img style="    width: 100%;  height: auto;"src="views/Halfondlogotr.png"/>
+ -->					</td>
 
 						<!-- Date, User Manual, Logout -->
 						<td style="vertical-align:middle;width:25%; text-align:center ">
@@ -192,20 +198,19 @@ $email = $_SESSION["user_email"];
 					<!-- Middle -->
 					<tr>
 						<!-- Accounts -->
-						<td class="accountsWidget" style="padding-top:0px;height:480px; width:25%; padding-top:0px;">
-							<h2> Accounts </h2>
+						<td rowspan="2" class="accountsWidget" style="padding-top:0px; padding-top:0px;">
+							<h3> Accounts </h3>
 							<?php require_once('widgets/accounts_w.php'); ?>
 						</td>
 
 						<!-- Graph -->
-						<td class="graphWidget" style="vertical-align: top; border-collapse: collapse;">
-							<h2> Graph </h2>
-							<?php require_once('widgets/graph_w.php');?>
+						<td class="graphWidget" style=" height:50%; vertical-align: top; border-collapse: collapse;">
+ 							<?php require_once('widgets/graph_w.php');?>
 						</td>
 
 						<!--Budget -->
-						<td class="budgetWidget" style="padding-top:0px">	
-							<h2> Monthly Budget </h2>
+						<td rowspan="2" class="budgetWidget" style="padding-top:0px">	
+							<h3> Monthly Budget </h3>
 						</td>
 						
 					</tr>
@@ -213,19 +218,21 @@ $email = $_SESSION["user_email"];
 					<!-- Bottom -->
 					<tr>
 						<!-- Bottom Left -->
-						<td class="buySellWidget" style="height: 255px;padding-top: 0px;  border-collapse: collapse;">
+						<!-- <td class="buySellWidget" style="padding-top: 0px;  border-collapse: collapse;">
 						
-						</td>
+						</td> -->
 						<!-- Transactions-->
-						<td class="transactionsWidget" style="padding-top:0px;height:200px ">
-							<h2>Transactions</h2>
-							<?php require_once('widgets/transactions_w.php');?>
+						<td class="transactionsWidget" style="padding-top:0px;    padding-bottom: 10px;overflow-y:auto">
+							<h3>Transactions</h3>
+							<div style="overflow-y:auto; max-height:70%;">
+								<?php require_once('widgets/transactions_w.php');?>
+								</div>
 						</td>
 
 						<!-- Bottom Right-->
-						<td style="height:200px; ">
+						<!-- <td style=" ">
 
-						</td>
+						</td> -->
 
 					</tr>
 					
@@ -236,6 +243,8 @@ $email = $_SESSION["user_email"];
 		<script>window.jQuery || document.write('<script src="../jquery.min.js"><\/script>')</script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="vendors/sortable.min.js"></script>
+
 	</body>
 
 </html>
