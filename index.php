@@ -22,7 +22,7 @@ if (isset($_GET['cat']) && isset($_GET['bud']) && isset($_SESSION["user_email"])
 	require_once("php/db_query.php");
 	$db->setEmail(strtolower($_SESSION["user_email"]));
 	$db->setBudget($cat, $bud);
-	header("Location: http://localhost/worth/index.php");
+	header("Location: https://localhost/worth/index.php");
 } else {
 
 	if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "") {
@@ -32,7 +32,7 @@ if (isset($_GET['cat']) && isset($_GET['bud']) && isset($_SESSION["user_email"])
 
 		if ($_POST['action'] == 'register') {
 			if (!$db->createUser(strtolower($_POST['inputEmail']), $_POST['inputPassword'])) {
-				header("Location: http://localhost/worth/index.php?create=fail");
+				header("Location: https://localhost/worth/index.php?create=fail");
 			} else {
 				$_SESSION["user_email"] = strtolower($email);
 				$db->setEmail(strtolower($email));
