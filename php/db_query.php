@@ -86,6 +86,7 @@ class WorthDB {
 		$query = "DELETE FROM accounts WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
 		$result = $this->getQueryResult($query);
 		$query = "DELETE FROM transactions WHERE email = '" . $this->email . "' AND accountName = '" . $accountName . "';";
+		$result = $this->getQueryResult($query);
 		return $result;
 	}
 
