@@ -19,7 +19,7 @@ $email = $_SESSION["user_email"];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%">
 
 	<head>
 
@@ -40,6 +40,7 @@ $email = $_SESSION["user_email"];
 		<style>
 			body {
 			    background-color: #333333;
+			    height: 100%;
 			}
 
 			h2 {
@@ -169,21 +170,25 @@ $email = $_SESSION["user_email"];
 	<body>
 
 
-		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100% ">
+		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100%; height:100%">
 			<thead>
 			</thead>
 				<tbody>
 					<!-- Top -->
 					<tr>
 						<!-- Import csv -->
-						<td style ="width: 400px; height: 80px; text-align:center; padding-top:0px">
+						<td style ="height:10%;text-align:center; padding-top:0px">
 							<h2> CSV Import </h2>
 							<?php require_once('widgets/csv_w.php');?>
 						</td>
 						<!-- Search -->
-						<td style="width:50%; text-align: -webkit-center;">
-						
-						</td>
+						<td style="width:50%; text-align: -webkit-center; " >
+							<div style="height:100%; width:100%;  background-image: url('views/Halfondlogotr.png');
+    background-position-x: center; background-repeat: no-repeat; background-size: contain;">
+								
+							</div>
+<!-- 							<img style="    width: 100%;  height: auto;"src="views/Halfondlogotr.png"/>
+ -->					</td>
 
 						<!-- Date, User Manual, Logout -->
 						<td style="vertical-align:middle;width:25%; text-align:center ">
@@ -194,19 +199,18 @@ $email = $_SESSION["user_email"];
 					<!-- Middle -->
 					<tr>
 						<!-- Accounts -->
-						<td class="accountsWidget" style="padding-top:0px;height:480px; width:25%; padding-top:0px;">
+						<td rowspan="2" class="accountsWidget" style="padding-top:0px; padding-top:0px;">
 							<h2> Accounts </h2>
 							<?php require_once('widgets/accounts_w.php'); ?>
 						</td>
 
 						<!-- Graph -->
-						<td class="graphWidget" style="vertical-align: top; border-collapse: collapse;">
-							<h2> Graph </h2>
+						<td class="graphWidget" style="padding-top:0px; height:50%; vertical-align: top; border-collapse: collapse;">
 <!-- 							<?php require_once('widgets/graph_w.php');?>
  -->						</td>
 
 						<!--Budget -->
-						<td class="budgetWidget" style="padding-top:0px">	
+						<td rowspan="2" class="budgetWidget" style="padding-top:0px">	
 							<h2> Monthly Budget </h2>
 						</td>
 						
@@ -215,19 +219,19 @@ $email = $_SESSION["user_email"];
 					<!-- Bottom -->
 					<tr>
 						<!-- Bottom Left -->
-						<td class="buySellWidget" style="height: 255px;padding-top: 0px;  border-collapse: collapse;">
+						<!-- <td class="buySellWidget" style="padding-top: 0px;  border-collapse: collapse;">
 						
-						</td>
+						</td> -->
 						<!-- Transactions-->
-						<td class="transactionsWidget" style="padding-top:0px;height:200px ">
+						<td class="transactionsWidget" style="padding-top:0px">
 							<h2>Transactions</h2>
 							<?php require_once('widgets/transactions_w.php');?>
 						</td>
 
 						<!-- Bottom Right-->
-						<td style="height:200px; ">
+						<!-- <td style=" ">
 
-						</td>
+						</td> -->
 
 					</tr>
 					
