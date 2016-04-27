@@ -29,7 +29,6 @@ $email = $_SESSION["user_email"];
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="Worth for CSCI 310, Group I">
 		<meta name="author" content="Utkash Dubey">
-		<script src="vendors/sortable.min.js"></script>
 		<link rel="stylesheet" href="vendors/sortable-theme-bootstrap.css" />
 		<link rel="icon" href="favicon.ico">
 		<!-- Latest compiled and minified CSS -->
@@ -205,9 +204,9 @@ $email = $_SESSION["user_email"];
 						</td>
 
 						<!-- Graph -->
-						<td class="graphWidget" style="padding-top:0px; height:50%; vertical-align: top; border-collapse: collapse;">
-<!-- 							<?php require_once('widgets/graph_w.php');?>
- -->						</td>
+						<td class="graphWidget" style=" height:50%; vertical-align: top; border-collapse: collapse;">
+ 							<?php require_once('widgets/graph_w.php');?>
+						</td>
 
 						<!--Budget -->
 						<td rowspan="2" class="budgetWidget" style="padding-top:0px">	
@@ -223,7 +222,7 @@ $email = $_SESSION["user_email"];
 						
 						</td> -->
 						<!-- Transactions-->
-						<td class="transactionsWidget" style="padding-top:0px;overflow-y:auto">
+						<td class="transactionsWidget" style="padding-top:0px;    padding-bottom: 10px;overflow-y:auto">
 							<h3>Transactions</h3>
 							<div style="overflow-y:auto; max-height:70%;">
 								<?php require_once('widgets/transactions_w.php');?>
@@ -244,6 +243,8 @@ $email = $_SESSION["user_email"];
 		<script>window.jQuery || document.write('<script src="../jquery.min.js"><\/script>')</script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script src="vendors/sortable.min.js"></script>
+
 	</body>
 
 </html>

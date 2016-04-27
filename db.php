@@ -1,24 +1,19 @@
 <html><body>
 
 <?php
-
 	ini_set('display_errors', 1);
-
 	$serverName = 'localhost';
 	$username = 'root';
 	$password = 'mystockportfolio123';
-
 	$link = mysql_connect($serverName, $username, $password);
 	/*if ($link) {
 		print '[SUCCESS] Connected <br />'.
 	} else {
 		die('[FAILURE] Could not connect. ' . mysql_error());
 	}*/
-
 	$db_selected = mysql_select_db('worth')
 	or die('[FAILURE] You need to create the "worth" database manually:<br /><strong>sudo mysql -u root -p<br /></strong>[enter password(s)]<strong><br />create database worth;<br />exit<br /></strong> and then revisit this page.
 		');
-
 	/*if (!$db_selected) {
 		$query = 'CREATE DATABASE worth;';
 		if (mysql_query($query, $link)) {
@@ -33,11 +28,9 @@
 			die('Error creating database. ' . mysql_error());
 		}
 	}*/
-
 	getQueryResult($link, 'drop table if exists users;');
 	getQueryResult($link, 'drop table if exists transactions;');
 	getQueryResult($link, 'drop table if exists accounts;');
-
 	getQueryResult($link, 'create table users (email varchar(32) primary key, password varchar(256) not null);');
 	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime(0) not null, category varchar(32) not null, asset int(2) not null);');
 	getQueryResult($link, 'create table accounts (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null);');
@@ -51,7 +44,6 @@
 	getQueryResult($link, 'insert into transactions values (6, "udubey@usc.edu", "Charles Schwab Savings Account", "Google Inc.", 400, "2014-11-28", "Income", 1);');
 	getQueryResult($link, 'insert into transactions values (4, "udubey@usc.edu", "Debit Card", "Chick-fil-a", -75.78, "2015-05-27", "Dining", 0);');
 	getQueryResult($link, 'insert into transactions values (5, "udubey@usc.edu", "Debit Card", "Century 16", 800, "2016-02-07", "Movies", 0);');
-
 	function getQueryResult($link, $query) {
 		if (mysql_query($query, $link)) {
 			print '[SUCCESS] ' . $query . '<br />';
@@ -59,11 +51,9 @@
 			die('[FAILURE] ' . mysql_error());
 		}
 	}
-
 	mysql_close($link);
 	print 'Setup successful.';
 	header("Location: index.php");
-
 ?>
 
 </body></html>
