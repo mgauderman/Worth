@@ -20,7 +20,7 @@ if (isset($_GET['cat']) && isset($_GET['bud']) && isset($_SESSION["user_email"])
 		$cat = str_replace("AND", " & ", $cat);
 	}
 	require_once("php/db_query.php");
-	$db->setEmail($_SESSION["user_email"]);
+	$db->setEmail(strtolower($_SESSION["user_email"]));
 	$db->setBudget($cat, $bud);
 	header("Location: http://localhost/worth/index.php");
 } else {
@@ -30,14 +30,25 @@ if (isset($_GET['cat']) && isset($_GET['bud']) && isset($_SESSION["user_email"])
 		$email = $_POST["inputEmail"];
 		$password = $_POST["inputPassword"];
 
-		// encrypt the given password to compare against encrypted password in DB
-		$encryptedPassword = encrypt($password);
+		if ($_POST['action'] == 'register') {
+			if (!$db->createUser(strtolower($_POST['inputEmail']), $_POST['inputPassword'])) {
+				header("Location: http://localhost/worth/index.php?create=fail");
+			} else {
+				$_SESSION["user_email"] = strtolower($email);
+				$db->setEmail(strtolower($email));
+			}
+		} else {
+			// encrypt the given password to compare against encrypted password in DB
+			$encryptedPassword = encrypt($password);
 
-		if ($db->credentialsValid($email, $encryptedPassword)) {
-			$_SESSION["user_email"] = strtolower($email);
-			$db->setEmail(strtolower($email));
+			if ($db->credentialsValid($email, $encryptedPassword)) {
+				$_SESSION["user_email"] = strtolower($email);
+				$db->setEmail(strtolower($email));
+			}
+
 		}
-
+	} else if (isset($_GET['create'])) {
+		print 'Account creation failed, user already exists.';
 	}
 
 	// if the user is not logged in, show the login page, else show the dashboard
