@@ -222,7 +222,7 @@
 			pattern: [ '#E91E63', '#2196F3', '#4CAF50', '#FFF176', '#FF5722', '#f44336', '#3F51B5', '#009688', '#FF9800', '#212121', '#D500F9' ]
 		}, 
 		legend: {
-			position: 'right'
+			position: 'bottom'
 		}
 	});
 
