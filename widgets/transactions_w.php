@@ -14,10 +14,12 @@ if (isset($_GET['tas'])) {
 }
 
 ?>
+
+
 <table class="table table-striped">
 	<thead>
 	    <tr>
-	    	<th>Account</th>
+	    	<th data-sortable="true">Account</th>
 			<th>Date</th>
 			<th>Amount</th>
 			<th>Merchant</th>

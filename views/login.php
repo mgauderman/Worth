@@ -30,9 +30,10 @@ $_SESSION["user_email"] = "";
 				<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+				<button class="btn btn-lg btn-primary btn-block"name="action" value="signin" type="submit">Login</button>
+				<button class="btn btn-so btn-primary btn-block" name="action" value="register" type="submit">Register</button>
 			</form>
-			
+
 		</div> <!-- /container -->
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

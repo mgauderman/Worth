@@ -29,6 +29,8 @@ $email = $_SESSION["user_email"];
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="Worth for CSCI 310, Group I">
 		<meta name="author" content="Utkash Dubey">
+		<script src="vendors/sortable.min.js"></script>
+		<link rel="stylesheet" href="vendors/sortable-theme-bootstrap.css" />
 		<link rel="icon" href="favicon.ico">
 		<!-- Latest compiled and minified CSS -->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -200,8 +202,8 @@ $email = $_SESSION["user_email"];
 						<!-- Graph -->
 						<td class="graphWidget" style="vertical-align: top; border-collapse: collapse;">
 							<h2> Graph </h2>
-							<?php require_once('widgets/graph_w.php');?>
-						</td>
+<!-- 							<?php require_once('widgets/graph_w.php');?>
+ -->						</td>
 
 						<!--Budget -->
 						<td class="budgetWidget" style="padding-top:0px">	
