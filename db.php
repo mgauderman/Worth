@@ -32,7 +32,7 @@
 	getQueryResult($link, 'drop table if exists transactions;');
 	getQueryResult($link, 'drop table if exists accounts;');
 	getQueryResult($link, 'create table users (email varchar(32) primary key, password varchar(256) not null);');
-	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime(0) not null, category varchar(32) not null, asset int(2) not null);');
+	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime not null, category varchar(32) not null, asset int(2) not null);');
 	getQueryResult($link, 'create table accounts (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null);');
 	getQueryResult($link, 'insert into users values ("udubey@usc.edu", "temporary");');
 	getQueryResult($link, 'insert into accounts values (1, "udubey@usc.edu", "Visa Credit Card");');
