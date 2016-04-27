@@ -82,7 +82,7 @@ foreach ($accounts as $accountName) {
 	}
 
 	$name = 'check' . $count;
-
+	$count++;
 	echo '<div class="checkbox">
 		<label>
 			<input type="checkbox" ' . $ischecked . ' name="' . $name . '" onclick="window.location.href=\'' . $link . '\'">' . $accountName . '</input>

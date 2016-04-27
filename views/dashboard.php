@@ -211,8 +211,8 @@ $email = $_SESSION["user_email"];
 						<!--Budget -->
 						<td rowspan="2" class="budgetWidget" style="padding-top:0px">	
 							<h3> Monthly Budget </h3>
+							<?php require_once('widgets/budget_w.php');?>
 						</td>
-						
 					</tr>
 
 					<!-- Bottom -->

@@ -30,7 +30,7 @@ $_SESSION["user_email"] = "";
 				<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-				<button class="btn btn-lg btn-primary "name="action" value="signin" type="submit" style="margin-right: 2px; width: 49%;">Login</button>
+				<button class="btn btn-lg btn-primary " name="action" value="signin" type="submit" style="margin-right: 2px; width: 49%;">Login</button>
 				<button class="btn btn-lg btn-primary " name="action" value="register" type="submit" style="width: 49%;">Register</button>
 			</form>
 

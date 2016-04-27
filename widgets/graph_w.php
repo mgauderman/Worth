@@ -70,7 +70,7 @@
  
 ?>
 
-<div style="font-color: red" id="chart-container">
+<div id="chart-container">
 	<div id="chart"></div>
 	<p> 
 		Start Date: <input type="text" id="start-datepicker" />
