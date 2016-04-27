@@ -194,6 +194,64 @@ class WorthDB {
 		}*/
 	}
 
+	public function getCategories() { // no need to have a database for this, hard coded accomplishes what this should do
+		return array(
+			'Leisure & Entertainment',
+			'Food & Groceries',
+			'Home & Household Maintenance',
+			'Utilities',
+			'Income',
+			'Savings',
+			'Health Care',
+			'Consumer Debt',
+			'Personal Care',
+			'Hobbies',
+			'Automobile & Maintenance',
+			'Investments',
+			'Childcare',
+			'Clothing & Accessories',
+			'Education',
+			'Events',
+			'Gifts',
+			'Vacation',
+			'Taxes & Fines'
+			);
+	}
+
+	public function getTotalExpenditureOfCategory($category) {
+		$query = 'SELECT budget FROM budgets WHERE email="' . $this->email . '" AND category = "' . $category . '";';
+		$result = $this->getQueryResult($query);
+		$expenditureOfCategory = array();
+		foreach ($this->getCategories() as $cat) {
+			$expenditureOfCategory['name'] = $cat;
+			$expenditureOfCategory['budget'] = number_format(0, 2);
+			$expenditureOfCategory['expenditure'] = number_format(0, 2);
+		}
+		while ($row = mysql_fetch_array($result)) {
+			$expenditureOfCategory['categoryName'] = $category;
+			$expenditureOfCategory['budget'] = number_format(floatval(str_replace(',', '', number_format($row['budget'], 2))), 2);
+			$query = 'SELECT amount FROM transactions WHERE email = "' . $this->email . '" AND category = "' . $category . '" AND date >= DATE_FORMAT(NOW(), "%Y-%m-01") AND date <= NOW();';
+			$resultTwo = $this->getQueryResult($query);
+			$expenditure = 0.;
+			while ($rowTwo = mysql_fetch_array($resultTwo)) {
+				$expenditure = $expenditure + floatval(str_replace(',', '', number_format($rowTwo['amount'], 2)));
+			}
+			$expenditure = number_format($expenditure, 2);
+			$expenditureOfCategory['expenditure'] = $expenditure;
+		}
+		return $expenditureOfCategory;
+	}
+
+	public function setBudget($category, $amount) {
+		if (!in_array($category, $this->getCategories())) {
+			return false;
+		}
+		$query = 'DELETE FROM budgets WHERE email="' . $this->email . '" AND category = "' . $category . '";';
+		$result = $this->getQueryResult($query);
+		$query = 'INSERT INTO budgets (email, category, budget) VALUES ("' . $this->email . '", "' . $category . '", ' . $amount . ');';
+		$result = $this->getQueryResult($query);
+		return true;
+	}
 }
 
 

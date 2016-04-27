@@ -11,36 +11,47 @@ ini_set('display_errors', 1);
 require_once("php/db_query.php");
 $db = new WorthDB();
 $db->connect();
-//if Log in is clicked
-if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "" && $_POST["action"] == "signin") {
 
-	$email = $_POST["inputEmail"];
-	$password = $_POST["inputPassword"];
+if (isset($_GET['cat']) && isset($_GET['bud']) && isset($_SESSION["user_email"])) {
+	$cat = $_GET['cat'];
+	$bud = $_GET['bud'];
 
-	// encrypt the given password to compare against encrypted password in DB
-	$encryptedPassword = encrypt($password);
+	if (strpos($cat, "AND") !== false) {
+		$cat = str_replace("AND", " & ", $cat);
+	}
+	require_once("php/db_query.php");
+	$db->setEmail($_SESSION["user_email"]);
+	$db->setBudget($cat, $bud);
+	header("Location: http://localhost/worth/index.php");
+} else {
 
-	if ($db->credentialsValid($email, $encryptedPassword)) {
-		$_SESSION["user_email"] = strtolower($email);
-		$db->setEmail(strtolower($email));
+	if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "") {
+
+		$email = $_POST["inputEmail"];
+		$password = $_POST["inputPassword"];
+
+		// encrypt the given password to compare against encrypted password in DB
+		$encryptedPassword = encrypt($password);
+
+		if ($db->credentialsValid($email, $encryptedPassword)) {
+			$_SESSION["user_email"] = strtolower($email);
+			$db->setEmail(strtolower($email));
+		}
+
+	}
+
+	// if the user is not logged in, show the login page, else show the dashboard
+	if (!isset($_SESSION["user_email"]) || $_SESSION['user_email'] == "") {
+		require_once("views/login.php");
+	} else {
+		$db->setEmail($_SESSION["user_email"]);
+		require_once("views/dashboard.php");
 	}
 
 }
 
-//if Register is clicked
-else if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "" && $_POST["action"] == "register") {
-
-}
 function encrypt($pass_word) {
 	return $pass_word;
-}
-
-// if the user is not logged in, show the login page, else show the dashboard
-if (!isset($_SESSION["user_email"]) || $_SESSION['user_email'] == "") {
-	require_once("views/login.php");
-} else {
-	$db->setEmail($_SESSION["user_email"]);
-	require_once("views/dashboard.php");
 }
 
 ?>
