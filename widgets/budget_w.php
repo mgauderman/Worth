@@ -1,7 +1,7 @@
 <?php
-
+	$categories = $db->getCategories();
 ?>
-<div id="budget-container">
+<div>
 	<table class="table table-striped">
 		<thead>
 		    <tr>
@@ -10,6 +10,26 @@
 				<th> Budgeted Expenditure </th>
 		    </tr>
 			<tbody>
+				<?php
+				/* 
+				foreach ( $categories as $category ) {
+					$expenditurePerCategory = $db->getTotalExpenditurePerCategory( $category );
+					foreach ( $expenditurePerCategory as $perCategory ) {
+						print '
+						<tr><td>';
+						print ( $category );
+						print '</td>';
+						print '<td>'
+						pring $perCategory['expenditure'];
+						print '</td>'
+						print '<td>'
+						print $perCategory['budget']
+						print '</td></tr>
+						';
+					}
+				}
+				*/
+				?>
 			</tbody>
 		</thead>
 	</table>
@@ -24,38 +44,8 @@
 		var newBudget = document.getElementById("new-budget").innerHTML;
 		var category = document.getElementById("category").innerHTML;
 		if ( newBudget !== null && category !== null ) {
-			// do some computation
+			// update the budget value in the database
+			// update the expenditure values and re-apply styling to the text
 		}
 	}
 </script>
-
-		<!--
-		<?php
-			/*
-			if ($selectedAccounts) {
-				foreach ($selectedAccounts as $account) {
-					$accountName = $account;
-					$transactions = $db->getTransactions($accountName);
-					foreach ($transactions as $transaction) {
-						if (sizeof($transaction) != 0) {
-							print '
-							<tr><td>';
-							print($accountName);
-							print '</td>';
-							print '<td>';
-							print $transaction['date'];
-							print '</td><td>';
-							print $transaction['amount'];
-							print '</td><td>';
-							print $transaction['merchant'];
-							print '</td><td>';
-							print $transaction['category'];
-							print '</td></tr>
-							'; // on a separate line so the html is easier to read in "view source"
-						}
-					}
-				}
-			}
-			*/
-		?>
-		-->
