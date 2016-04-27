@@ -60,7 +60,7 @@ table[data-sortable].sortable-theme-bootstrap {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-
+  background: white;
 }
 /* line 12, ../sass/sortable-theme-bootstrap.sass */
 table[data-sortable].sortable-theme-bootstrap thead th {

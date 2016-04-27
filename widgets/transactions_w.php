@@ -16,7 +16,7 @@ if (isset($_GET['tas'])) {
 ?>
 
 
-<table class="table table-striped">
+<table class="table table-striped sortable-theme-bootstrap" data-sortable>
 	<thead>
 	    <tr>
 	    	<th data-sortable="true">Account</th>
@@ -55,3 +55,9 @@ if (isset($_GET['tas'])) {
 		</tbody>
 	</thead>
 </table>
+
+<style>
+table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"] {
+	
+}
+</style>
