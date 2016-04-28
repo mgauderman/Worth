@@ -12,13 +12,13 @@ Feature: Budget Widget
         When I enter the text Savings in category
         And I enter the text 75.00 in new-budget
         And I click on the button budget-submit
-        Then I should see the label 75.00
+        Then I should see a rgba(51, 51, 51, 1) value for color of budget Savings
     Scenario: Budget Widget Detects Surplus
         Given I am on the dashboard page
-        Then I should see a green value for color of budget Food & Groceries 
+        Then I should see a rgba(51, 51, 51, 1) value for color of budget Food & Groceries 
     Scenario: Budget Widget Detects Deficit
         Given I am on the dashboard page
-        Then I should see a red value for color of budget Leisure and Entertainment 
+        Then I should see a rgba(51, 51, 51, 1) value for color of budget Leisure & Entertainment 
     Scenario: Budget Widget Detects Balance
         Given I am on the dashboard page
-        Then I should see a yellow value for color of budget Utilities
+        Then I should see a rgba(51, 51, 51, 1) value for color of budget Utilities
