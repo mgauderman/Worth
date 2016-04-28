@@ -18,7 +18,7 @@
 
 
 <form action="" method="post" enctype="multipart/form-data">
-    <input style="display: inline;" type="file" name="csv" value="csv" />
+    <input style="display: inline;" type="file" name="csv" value="csv" id="csv"/>
     <input type="submit" name="submit" value="Save" />
 </form>
 <!-- <input type="file" accept=".csv" />

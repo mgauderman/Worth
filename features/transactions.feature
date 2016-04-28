@@ -7,10 +7,6 @@ Feature: Transactions Widget
         Given I am on the dashboard page
         Then I should see the label Transactions
         And I should see a sortable table
-    Scenario: Transactions Widget Displays Transactions
-        Given I am on the dashboard page
-        When I check the checkbox check0
-        Then I should see the transactions for that account
     Scenario: Transactions Widget Has All Fields
         Given I am on the dashboard page
         Then I should see the label Date

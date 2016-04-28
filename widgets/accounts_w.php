@@ -85,7 +85,8 @@ foreach ($accounts as $accountName) {
 	$count++;
 	echo '<div class="checkbox">
 		<label>
-			<input type="checkbox" ' . $ischecked . ' name="' . $name . '" onclick="window.location.href=\'' . $link . '\'">' . $accountName . '</input>
+			<input type="checkbox" ' . $ischecked . ' name="' . $name . '" id=' . $accountName . 
+		' onclick="window.location.href=\'' . $link . '\'">' . $accountName . '</input>
 
 		</label>
 	</div>';

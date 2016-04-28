@@ -11,7 +11,8 @@ Then /^I should be redirected to the Dashboard View$/ do
 end
 
 Given /^I am on the dashboard page$/ do
-	visit 'http://localhost/worth/'
+	visit 'https://localhost/worth/db.php'
+	visit 'https://localhost/worth/'
 	#page.evaluate_script('document.body.style.zoom = 0.75;')
 	if !page.has_button?('Login')
 		visit 'http://localhost'
@@ -26,6 +27,11 @@ Given /^I am on the dashboard page$/ do
 	end
 	expect(page).to have_content('Logout')
 end
+
+When /^I refresh the page$/ do
+	page.evaluate_script("window.location.reload()")
+end
+
 
 
 
@@ -81,8 +87,9 @@ Then /^I should see the table (.*)$/ do |tab|
 end
 
 Then /^I should see (.*) checked$/ do |box|
-	expect(box).to be_checked
-end
+    find('input#' + box + ':checked')
+   end
+   
 When /^I enter (.*) for (.*)$/ do |text, field|
 	fill_in(field, with: text)
 end

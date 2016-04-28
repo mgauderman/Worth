@@ -16,7 +16,7 @@ if (isset($_GET['tas'])) {
 ?>
 
 
-<table class="table table-striped trans-table sortable-theme-bootstrap;"style="margin-bottom: 0px !important;" data-sortable>
+<table id="transactionsTable" class="table table-striped trans-table sortable-theme-bootstrap;"style="margin-bottom: 0px !important;" data-sortable>
 	<thead>
 	    <tr>
 	    	<th data-sortable="true">Account</th>

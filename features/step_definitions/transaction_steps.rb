@@ -8,7 +8,9 @@ Then /^I should see a sortable table$/ do
 end
 
 When /^I sort by (.*) in the table$/ do |field|
-		find('th', text:field).click
+		within('table#transactionsTable') do
+			find('th', text:field).click
+		end
 end
 
 
