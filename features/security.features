@@ -1,0 +1,10 @@
+Feature: Security
+    In order to make my website visit secure
+    As a user
+    I need to be logged out after two minutes of inactivity
+    Scenario: User is inactive for two minutes after logging in
+        Given I am on the dashboard page
+        When I wait 125 seconds
+		Then I should be forwarded to the Login View
+
+
