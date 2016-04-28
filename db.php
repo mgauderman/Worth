@@ -40,7 +40,7 @@
 	getQueryResult($link, 'drop table if exists budgets;');
 
 	getQueryResult($link, 'create table users (email varchar(32) primary key, password varchar(256) not null);');
-	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime(0) not null, category varchar(32) not null, asset int(2) not null);');
+	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime not null, category varchar(32) not null, asset int(2) not null);');
 	getQueryResult($link, 'create table accounts (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null);');
 
 	getQueryResult($link, 'create trigger encr1 before insert on users for each row
