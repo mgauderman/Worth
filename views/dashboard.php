@@ -166,7 +166,7 @@ $email = $_SESSION["user_email"];
 
 	</head>
 
-	<body>
+	<body onload="startTimeout()">
 
 
 		<table class ="portfolioPage" style=" border-collapse: separate; border-spacing: 15px; width:100%; height:100%">
@@ -244,6 +244,29 @@ $email = $_SESSION["user_email"];
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<script src="vendors/sortable.min.js"></script>
+		<script type="text/javascript">
+
+			function startTimeout() {
+
+				var t;
+				window.onload = resetTimer;
+				document.onmousemove = resetTimer;
+				document.onkeypress = resetTimer;
+
+				function logout() {
+					location.href = 'php/logout.php';
+				}
+
+				function resetTimer() {
+					clearTimeout(t);
+					t = setTimeout(logout, 60000); // timeout after 1 minute
+					// console.log('reset');
+				}
+
+				setTimeout(startTimeout, 1000);
+			}
+
+		</script>
 
 	</body>
 

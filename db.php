@@ -14,6 +14,12 @@
 	$db_selected = mysql_select_db('worth')
 	or die('[FAILURE] You need to create the "worth" database manually:<br /><strong>sudo mysql -u root -p<br /></strong>[enter password(s)]<strong><br />create database worth;<br />exit<br /></strong> and then revisit this page.
 		');
+
+	print 'If you havent already, do these steps manually or the stuff wont REALLY work<br />';
+	print '<strong>sudo mysql -u root -p<br />';
+	print 'set @@session.block_encryption_mode="aes-256-cbc";<br />';
+	print 'set @iv = random_bytes(16);<br /></strong>';
+
 	/*if (!$db_selected) {
 		$query = 'CREATE DATABASE worth;';
 		if (mysql_query($query, $link)) {
@@ -36,6 +42,30 @@
 	getQueryResult($link, 'create table users (email varchar(32) primary key, password varchar(256) not null);');
 	getQueryResult($link, 'create table transactions (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null, merchant varchar(32) not null, amount float(32) not null, date datetime not null, category varchar(32) not null, asset int(2) not null);');
 	getQueryResult($link, 'create table accounts (id int(100) unsigned auto_increment primary key, email varchar(32) not null, accountName varchar(32) not null);');
+
+	getQueryResult($link, 'create trigger encr1 before insert on users for each row
+		begin
+			set new.email = AES_ENCRYPT(new.email, "thisispassword", @iv);
+			set new.password = AES_ENCRYPT(new.password, "thisispassword", @iv);
+		end;
+ 		');
+
+	getQueryResult($link, 'create trigger encr2 before insert on transactions for each row
+		begin
+			set new.email = AES_ENCRYPT(new.email, "thisispassword", @iv);
+			set new.accountName = AES_ENCRYPT(new.accountName, "thisispassword", @iv);
+			set new.merchant = AES_ENCRYPT(new.merchant, "thisispassword", @iv);
+			set new.category = AES_ENCRYPT(new.category, "thisispassword", @iv);
+		end;
+ 		');
+
+	getQueryResult($link, 'create trigger encr3 before insert on accounts for each row
+		begin
+			set new.email = AES_ENCRYPT(new.email, "thisispassword", @iv);
+			set new.accountName = AES_ENCRYPT(new.accountName, "thisispassword", @iv);
+		end;
+ 		');
+
 	getQueryResult($link, 'insert into users values ("udubey@usc.edu", "temporary");');
 	getQueryResult($link, 'insert into accounts values (1, "udubey@usc.edu", "Visa Credit Card");');
 	getQueryResult($link, 'insert into accounts values (2, "udubey@usc.edu", "Debit Card");');
@@ -50,6 +80,14 @@
 	getQueryResult($link, 'insert into transactions values (8, "udubey@usc.edu", "Visa Credit Card", "Rock Climbing Co.", -500, "2016-04-01", "Leisure & Entertainment", 0);');
 
 	getQueryResult($link, 'create table budgets (id int(100) unsigned auto_increment primary key, email varchar(32) not null, category varchar(32) not null, budget float(32) not null);');
+
+	getQueryResult($link, 'create trigger encr4 before insert on budgets for each row
+		begin
+			set new.email = AES_ENCRYPT(new.email, "thisispassword", @iv);
+			set new.category = AES_ENCRYPT(new.category, "thisispassword", @iv);
+		end;
+ 		');
+
 	getQueryResult($link, 'insert into budgets values (1, "udubey@usc.edu", "Food & Groceries", -350);');
 	getQueryResult($link, 'insert into budgets values (2, "udubey@usc.edu", "Leisure & Entertainment", -100);');
 
@@ -57,12 +95,12 @@
 		if (mysql_query($query, $link)) {
 			print '[SUCCESS] ' . $query . '<br />';
 		} else {
-			die('[FAILURE] ' . mysql_error());
+			die('<h3><strong>[FAILURE] ' . mysql_error() . ' </strong></h3>');
 		}
 	}
 	mysql_close($link);
-	print 'Setup successful.';
-	header("Location: index.php");
+	print '<h1><strong>Setup successful.</strong></h1>';
+	// header("Location: index.php");
 ?>
 
 </body></html>

@@ -95,17 +95,17 @@
 		var endDate = document.getElementById("end-datepicker").value;
 
 		if (location.search == "" || !location.search.contains("tas=")) {
-			window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate;
+			window.location = "https://localhost/worth/?start=" + startDate + "&end=" + endDate;
 		} else if (location.search.contains("&tas=") && !location.search.contains("start=")) {
 			var tasParams = location.search.substring(location.search.indexOf("&tas="));
-			window.location = "http://localhost/worth/?start=" + startDate + "&end=" + endDate + tasParams;
+			window.location = "https://localhost/worth/?start=" + startDate + "&end=" + endDate + tasParams;
 		} else if (location.search.contains("?tas=") && !location.search.contains("start=")) {
 			var tasParams = location.search.substring(location.search.indexOf("?tas="));
-			window.location = "http://localhost/worth" + tasParams + "&start=" + startDate + "&end=" + endDate;
+			window.location = "https://localhost/worth" + tasParams + "&start=" + startDate + "&end=" + endDate;
 		} else if (location.search.contains("&tas=") && location.search.contains("?start=")) {
-			window.location = "http://localhost/worth" + "?start=" + startDate + "&end=" + endDate + location.search.substring(location.search.indexOf("&tas"));
+			window.location = "https://localhost/worth" + "?start=" + startDate + "&end=" + endDate + location.search.substring(location.search.indexOf("&tas"));
 		} else if (location.search.contains("?tas=") && location.search.contains("&start=")) {
-			window.location = "http://localhost/worth" + location.search.substring(location.search.indexOf("?tas="), location.search.indexOf("&start=")) + "&start=" + startDate + "&end=" + endDate;
+			window.location = "https://localhost/worth" + location.search.substring(location.search.indexOf("?tas="), location.search.indexOf("&start=")) + "&start=" + startDate + "&end=" + endDate;
 		} else {
 			console.log('problem in graph_w.php');
 			console.log(startDate);

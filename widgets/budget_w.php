@@ -1,5 +1,7 @@
 <?php
+
 	$categories = $db->getCategories();
+
 ?>
 <div>
 	<div class="budget-tab">
@@ -13,26 +15,28 @@
 			</thead>
 			<tbody>
 				<?php
-				foreach ( $categories as $category ) {
-					$expenditureOfCategory = $db->getTotalExpenditureOfCategory( $category );
-					if ($expenditureOfCategory['expenditure'] > $expenditureOfCategory['budget']) {
-						print '<tr style="color:green;">';
-					} else if ($expenditureOfCategory['expenditure'] < $expenditureOfCategory['budget']) {
-						print '<tr style="color:red;">';
-					} else {
-						print '<tr style="color:yellow;">';
+
+					foreach ( $categories as $category ) {
+						$expenditureOfCategory = $db->getTotalExpenditureOfCategory( $category );
+						if ($expenditureOfCategory['expenditure'] > $expenditureOfCategory['budget']) {
+							print '<tr style="color:green;">';
+						} else if ($expenditureOfCategory['expenditure'] < $expenditureOfCategory['budget']) {
+							print '<tr style="color:red;">';
+						} else {
+							print '<tr style="color:yellow;">';
+						}
+						print '<td class="budget-cat" style="width: 40%">';
+						print ( $category );
+						print '</td>';
+						print '<td>';
+						print $expenditureOfCategory['expenditure'];
+						print '</td>';
+						print '<td>';
+						print $expenditureOfCategory['budget'];
+						print '</td></tr>
+						';
 					}
-					print '<td class="budget-cat" style="    width: 40%">';
-					print ( $category );
-					print '</td>';
-					print '<td>';
-					print $expenditureOfCategory['expenditure'];
-					print '</td>';
-					print '<td>';
-					print $expenditureOfCategory['budget'];
-					print '</td></tr>
-					';
-				}
+				
 				?>
 			</tbody>
 		</table>
@@ -40,7 +44,7 @@
 
 	Category: <input type="input" id="category"></input>
 	Budget: <input type="input" id="new-budget"></input>
-	<input type="submit" onclick="updateBudget()"></input>
+	<input type="submit" id="budget-submit" onclick="updateBudget()"></input>
 </div>
 
 <style>
